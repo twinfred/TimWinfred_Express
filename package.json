@@ -1,0 +1,22 @@
+{
+  "name": "timwinfredswebsite",
+  "version": "1.0.0",
+  "description": "timwinfred.com built using Express",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Tim Winfred (timwinfred.com)",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^2.0.1",
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "express-flash": "0.0.2",
+    "express-session": "^1.15.6",
+    "mongoose": "^5.1.1",
+    "socket.io": "^2.1.1"
+  }
+}
