@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems);
+            var instance = M.Sidenav.getInstance(elems);
+            $('.sidenav-triger').click(function(){
+                instance.open();
+            })
+
+            var location = 0;
+            $(window).scroll(function(){
+                location = $(window).scrollTop()
+                console.log(location)
+                if(location > 160){
+                    $('.next-bar').show();
+                    $('.sticky-nav').slideDown('fast', function(){
+                        $('.sticky-logo').fadeIn('fast');
+                        $('.sticky-menu').fadeIn('fast');
+                        $('.top-logo').fadeOut('fast');
+                        $('.top-menu').fadeOut('fast');
+                    });
+                }
+                if(location < 100){
+                    $('.next-bar').fadeOut('fast');
+                    $('.sticky-logo').fadeOut('fast');
+                    $('.sticky-menu').fadeOut('fast');
+                    $('.sticky-nav').slideUp('fast', function(){
+                        $('.top-logo').show('fast');
+                        $('.top-menu').fadeIn('fast');
+                    });
+                }
+            })
+        });
+    </script>
+    <title>tim winfred = ["Web Developer", "Entrepreneur", "Digital Marketer", "Designer"]</title>
+</head>
+<body>
+    <header>
+        <!-- Top Nav -->
+        <nav class="transparent z-depth-0 top-nav">
+            <div class="nav-wrapper">
+                <a href="/"><img class="brand-logo center hide-on-small-only top-logo" src="/img/tim-winfred-logo.png" alt="tim winfred"></a>
+                <a href="/"><img class="brand-logo center hide-on-med-and-up small-logo top-logo" src="/img/tim-winfred-logo.png" alt="tim winfred logo"></a>
+                <i data-target="slide-out" class="material-icons teal-icon teal-icon-large left hide-on-small-only sidenav-trigger top-menu">menu</i>
+                <i data-target="slide-out" class="material-icons teal-icon teal-icon-small left hide-on-med-and-up sidenav-trigger top-menu">menu</i>
+            </div>
+        </nav>
+        <!-- Sticky Nav -->
+        <nav class="z-depth-0 sticky-nav" style="display: none">
+            <div class="nav-wrapper">
+                <a href="/"><img class="brand-logo center hide-on-small-only sticky-logo" src="/img/tim-winfred-logo.png" alt="tim winfred" style="display: none"></a>
+                <a href="/"><img class="brand-logo center hide-on-med-and-up small-logo sticky-logo" src="/img/tim-winfred-logo.png" alt="tim winfred logo" style="display: none"></a>
+                <i data-target="slide-out" class="material-icons teal-icon teal-icon-large left hide-on-small-only sidenav-trigger sticky-menu" style="display: none">menu</i>
+                <i data-target="slide-out" class="material-icons teal-icon teal-icon-small left hide-on-med-and-up sidenav-trigger sticky-menu" style="display: none">menu</i>
+            </div>
+        </nav>
+        <!-- Slide Out Nav -->
+        <ul id="slide-out" class="sidenav">
+            <li><div class="user-view">
+                <img class="menu-logo center" src="/img/tim-winfred-logo.png" alt="tim winfred logo">
+            </div></li>
+            <li><a class="waves-effect" href="#!"><i class="material-icons">devices</i>Projects</a></li>
+            <li><a class="waves-effect" href="#!"><i class="material-icons">work</i>Experience</a></li>
+            <li><a class="waves-effect" href="#!"><i class="material-icons">person</i>About Me</a></li>
+            <li><a class="waves-effect" href="#!"><i class="material-icons">email</i>Contact</a></li>
+            <li><div class="divider"></div></li>
+            <li>
+                <a class="left waves-effect social-link" href="https://www.linkedin.com/in/timothywinfred/" target="_blank"><img class="social-logo" src="/img/linkedin.png" alt="linkedin"></a>
+                <a class="left waves-effect social-link" href="https://github.com/twinfred" target="_blank"><img class="social-logo" src="/img/github.png" alt="github"></a>
+                <a class="left waves-effect social-link" href="https://twitter.com/timwinfred/" target="_blank"><img class="social-logo" src="/img/Twitter.png" alt="twitter"></a>
+                <a class="left waves-effect social-link" href="mailto:timwinfred@gmail.com"><img class="social-logo" src="/img/email.png" alt="email"></a>
+            </li>
+        </ul>
+    </header>
+    <main>
+        <!-- Profile Photo & Description-->
+        <div class="center main-photo">
+            <!-- Desktop Photo -->
+            <img class="circle professional-photo z-depth-3 hide-on-med-and-down" src="/img/tim_professional_photo.jpg" alt="tim winfred">
+            <!-- Tablet Photo -->
+            <img class="circle professional-photo z-depth-3 hide-on-med-and-down professional-photo-med" src="/img/tim_professional_photo.jpg" alt="tim winfred">
+            <!-- Mobile Photo -->
+            <img class="circle professional-photo-small z-depth-2 hide-on-med-and-up" src="/img/tim_professional_photo.jpg" alt="tim winfred">
+            <div class="site-title row">
+                <div class="col s1 m1 l2"></div>
+                <h4 class="col s10 m10 l8 center hide-on-small-only">tim = ["Web Developer", "Entrepreneur", "Digital Marketer", "Designer"]</h4>
+                <h5 class="col s10 m10 l8 center hide-on-med-and-up">tim = ["Web Developer", "Entrepreneur", "Digital Marketer", "Designer"]</h5>
+                <div class="col s1 m1 l2"></div>
+            </div>
+        </div>
+        <!-- Recent Projects -->
+        <h5 class="center section-head">Recent Projects:</h5>
+        <div class="row recent-projects">
+            <a href="#!">
+                <div class="col s12 m6 l4">
+                    <div class="card teal-card">
+                        <div class="card-image">
+                            <img src="img/borrow_kingdom.jpg">
+                        </div>
+                        <div class="card-content white-text">
+                            <span class="card-title">Borrow Kingdom</span>
+                            <p class="project-details">An item rental system where users can rent "treasures" from other users for a flat daily rate.</p>
+                            <div class="divider"></div>
+                            <p class="project-languages">Python - Django - MySQL - HTML - CSS</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="#!">
+                <div class="col s12 m6 l4">
+                    <div class="card teal-card">
+                        <div class="card-image">
+                            <img src="img/borrow_kingdom.jpg">
+                        </div>
+                        <div class="card-content white-text">
+                            <span class="card-title">Borrow Kingdom</span>
+                            <p class="project-details">An item rental system where users can rent "treasures" from other users for a flat daily rate.</p>
+                            <div class="divider"></div>
+                            <p class="project-languages">Python - Django - MySQL - HTML - CSS</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="#!">
+                <div class="col s12 l4 hide-on-med-only">
+                    <div class="card teal-card">
+                        <div class="card-image">
+                            <img src="img/borrow_kingdom.jpg">
+                        </div>
+                        <div class="card-content white-text">
+                            <span class="card-title">Borrow Kingdom</span>
+                            <p class="project-details">An item rental system where users can rent "treasures" from other users for a flat daily rate.</p>
+                            <div class="divider"></div>
+                            <p class="project-languages">Python - Django - MySQL - HTML - CSS</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </main> 
+    <footer>
+        <!-- Jump To -->
+        <h5 class="center section-head">Jump To:</h5>
+        <div class="row jump-to">
+            <a href="#!">
+                <div class="col s6 m6 l3">
+                    <div class="card orange-card">
+                        <div class="card-content center project-content">
+                            <h6>All Projects</h6>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="#!">
+                <div class="col s6 m6 l3">
+                    <div class="card orange-card">
+                        <div class="card-content center project-content">
+                            <h6>Experience</h6>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="#!">
+                <div class="col s6 m6 l3">
+                    <div class="card orange-card">
+                        <div class="card-content center project-content">
+                            <h6>About Me</h6>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="#!">
+                <div class="col s6 m6 l3">
+                    <div class="card orange-card">
+                        <div class="card-content center project-content">
+                            <h6>Contact</h6>
+                        </div>
+                    </div>
+                </div>
+            </a> 
+        </div>
+        <!-- Footer Push -->
+        <div class="footer-push"></div>
+        <!-- Up Next -->
+        <a href="#!">
+            <div class="next-bar waves-effect" style="display: none">
+                <div class="next-text">
+                    <h6>Up Next: <span style="font-weight: bold">Experience&nbsp;</span></h6>
+                    <p><i class="material-icons next-arrow">arrow_forward</i></p>
+                </div>
+            </div>
+        </a>
+    </footer>
+</body>
+</html>

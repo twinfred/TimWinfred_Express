@@ -1,0 +1,202 @@
+/* MY CSS */
+h1, h2, h3, h4, h5, h6, p, div, span, ol, ul, li, textarea, input, button, a, blockquote, caption, table, tbody, thead, tfoot, tr, th, td, select, option {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+p {
+    line-height: 1.5;
+}
+input, textarea, select {
+margin-bottom: 4px;
+}
+.teal-icon-large {
+    color: #07889b;
+    font-size: 40px !important;
+}
+.teal-icon-small {
+    color: #07889b;
+    font-size: 30px !important;
+}
+.teal-icon:hover {
+    cursor: pointer;
+}
+.brand-logo {
+    width: 200px;
+    padding-top: 30px !important;
+}
+.small-logo {
+    width: 140px;
+}
+.top-nav, top-nav-space {
+    padding: 10px 0px 10px 0px;
+    height: 140px !important;
+}
+.menu-logo {
+    height: 70px;
+    margin: 0 auto;
+}
+.social-logo {
+    width: 40px;
+}
+.social-logo:hover {
+    -webkit-animation:spin 4s linear infinite;
+    -moz-animation:spin 4s linear infinite;
+    animation:spin 4s linear infinite;
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+.social-link {
+    margin-top: 10px;
+    padding: 10px 11px !important;
+    height: 60px !important;
+}
+.social-link:first-child {
+    margin-left: 22px!important;
+}
+
+.main-photo {
+    background:
+        linear-gradient(
+            rgb(255, 255, 255) 10%, 
+            #ffffff00,
+            rgb(255, 255, 255) 95% 
+        ),
+        url('img/downtow-los-angeles.jpg');
+    background-size: cover;
+    padding: 20px 0px 180px 0px;
+    margin-top: 40px;
+}
+.main-photo-small {
+    background:
+        linear-gradient(
+            rgb(255, 255, 255) 10%, 
+            #ffffff00,
+            rgb(255, 255, 255) 95% 
+        ),
+        url('img/downtow-los-angeles.jpg');
+    background-size: cover;
+    padding: 10px 0px 120px 0px;
+    margin-top: 5px;
+}
+.professional-photo {
+    width: 25%;
+    border: 4px solid white;
+}
+@media screen and (min-width: 993px){
+    .professional-photo-med {
+        display: none;
+    }
+}
+@media screen and (max-width: 600px){
+    .professional-photo-med {
+        display: none;
+    }
+}
+@media screen and (max-width: 992px) and (min-width: 601px){
+    .professional-photo-med {
+        display: block !important;
+        margin: 0px auto !important;
+        width: 35%;
+        border: 4px solid white;
+    }
+}
+.professional-photo-small {
+    width: 50%;
+    border: 4px solid white;
+}
+.site-title {
+    margin-top: 20px;
+}
+.site-title h4, .site-title h5 {
+    color: #2c2c2c;
+    text-shadow: white 0px 0px 20px;   
+}
+.site-title h4 {
+    font-size: 2.6rem !important;
+}
+
+/* STICKY TOP */
+.sticky-nav {
+    padding: 10px 0px 10px 0px;
+    height: 85px !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.959) !important;
+    box-shadow: #c7c7c7 0px 0px 12px !important;
+    z-index: 100;
+}
+.sticky-logo {
+    width: 100px;
+    padding-top: 6px !important;
+}
+
+/* NEXT BAR */
+.next-bar {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 214px;
+    height: 45px;
+    background-color: #07889b;
+    padding-left: 13px;
+    box-shadow: #747474 0px 0px 12px;
+}
+.next-text h6 {
+    color: white;
+    margin-top: 12px;
+    display: inline-block;
+    vertical-align: top;
+}   
+.next-text p {
+    color: white;
+    margin-top: 10px;
+    display: inline-block;
+}
+.footer-push {
+    height: 100px;
+    width: 100%;
+}
+
+/* Recent Projects */
+.section-head {
+    color: #e37222;
+}
+.recent-projects {
+    margin-bottom: 50px !important;
+}
+@media screen and (min-width: 993px) {
+    .recent-projects {
+        margin: 0px 8%;
+    }
+}
+.teal-card {
+    background-color: #07889b !important;
+}
+.card:hover {
+    box-shadow: #747474 0px 0px 12px !important;
+}
+.project-details {
+    margin-bottom: 18px !important;
+}
+.project-languages {
+    margin-top: 18px !important;
+    margin-bottom: 0px !important;
+    font-size: .8rem !important;
+}
+
+/* Jump To */
+@media screen and (min-width: 993px) {
+    .jump-to {
+        margin: 0px 8%;
+    }
+}
+.orange-card {
+    background-color: #07889b !important;
+    color: white;
+}
+.project-content {
+    padding: 10px !important;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="main.css">
+    <title>Admin Login</title>
+</head>
+<body>
+    <div class="form_box">
+        <img src="/img/tim-winfred-logo.png" alt="tim winfred logo">
+        <form action="/api/users" method="post">
+            <table>
+                <tr>
+                    <td><input type="text" name="first_name" placeholder="First Name"></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="last_name" placeholder="Last Name"></td>
+                </tr>
+                <tr>
+                    <td><input type="email" name="email" placeholder="Email"></td>
+                </tr>
+                <tr>
+                    <td><input type="password" name="password" placeholder="Password"></td>
+                </tr>
+                <tr>
+                    <td><input type="password" name="passConf" placeholder="Confirm Password"></td>
+                </tr>
+                <tr>
+                    <td><input type="password" name="secret" placeholder="Secret Code"></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Register"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>

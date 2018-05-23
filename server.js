@@ -3,6 +3,8 @@ const app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 const bodyParser = require('body-parser');
+const session = require('express-session');
+const flash = require('express-flash');
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
