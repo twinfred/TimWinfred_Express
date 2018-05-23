@@ -1,40 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="main.css">
-    <title>Admin Login</title>
+        <title>Admin Login</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="description" content="Full-stack freelance web programmer, software developer and designer in Los Angeles, California.">
+        <meta name="keywords" content="tim winfred, timothy winfred, full stack, web, software, developer, programmer, freelance, full-stack, web programmer, web developer, software developer, software programmer, web designer, back-end, front-end, back-end developer, front-end programmer, timwinfred.com, timwinfred, timothywinfred.com timothywinfred">
+        <meta property="og:site_name" content="TimWinfred.com">
+        <meta property="og:url" content="http://www.timwinfred.com">
+        <meta property="og:title" content='tim winfred = ["Web Developer", "Entrepreneur", "Digital Marketer", "Designer"]'>
+        <meta property="og:description" content="Full-stack freelance web programmer, software developer and designer in Los Angeles, California.">
+        <meta property="og:image" content="/img/tim_professional_photo_fb.jpg">
+        <meta property="og:image:width" content="630">
+        <meta property="og:image:height" content="330">
+        <meta property="og:type" content="website">
+        <meta name="twitter:site" content="timwinfred">
+        <meta name="twitter:url" content="http://www.timwinfred.com">
+        <meta name="twitter:title" content='tim winfred = ["Web Developer", "Entrepreneur", "Digital Marketer", "Designer"]'>
+        <meta name="twitter:description" content="Full-stack freelance web programmer, software developer and designer in Los Angeles, California.">
+        <meta name="twitter:card" content="summary">
+        <meta name="title" content='tim winfred = ["Web Developer", "Entrepreneur", "Digital Marketer", "Designer"]'>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+        <link rel="stylesheet" href="reset.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="/main.css">
+        <script>
+            var email_reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+            document.addEventListener('DOMContentLoaded', function() {
+                $(document).on('click', '#submit', function(){
+                    $('.passErr').empty();
+                    $('.emailErr').empty();
+                    if($('#password').val().length < 1){
+                        $('.passErr').append("<p class='errorMsg'>A password is required</p>")
+                    }
+                    if(!email_reg.test($('#email').val())){
+                        $('.emailErr').append("<p class='errorMsg'>Your email isn't the correct format</p>")
+                    }
+                    if($('#password').val().length >= 1 && email_reg.test($('#email').val())){
+                        $('form').submit();
+                    }
+                })
+            })
+        </script>
 </head>
 <body>
-    <div class="form_box">
-        <img src="/img/tim-winfred-logo.png" alt="tim winfred logo">
-        <form action="/api/users" method="post">
-            <table>
-                <tr>
-                    <td><input type="text" name="first_name" placeholder="First Name"></td>
-                </tr>
-                <tr>
-                    <td><input type="text" name="last_name" placeholder="Last Name"></td>
-                </tr>
-                <tr>
-                    <td><input type="email" name="email" placeholder="Email"></td>
-                </tr>
-                <tr>
-                    <td><input type="password" name="password" placeholder="Password"></td>
-                </tr>
-                <tr>
-                    <td><input type="password" name="passConf" placeholder="Confirm Password"></td>
-                </tr>
-                <tr>
-                    <td><input type="password" name="secret" placeholder="Secret Code"></td>
-                </tr>
-                <tr>
-                    <td><input type="submit" value="Register"></td>
-                </tr>
-            </table>
-        </form>
+    <div class="row login-form">
+        <div class="col s1 m2 l4"></div>
+        <div class="col s10 m8 l4">
+            <img class="brand-logo" src="/img/tim-winfred-logo.png" alt="tim winfred">
+            <h4>Login</h4>
+            <form action="/login" method="post">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input type="email" name="email" id="email" class="validate">
+                        <label for="email">Email</label>
+                        <div class="emailErr"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input type="password" name="password" id="password" class="validate">
+                        <label for="password">Password</label>
+                        <div class="passErr"></div>
+                    </div>
+                </div>
+            </form>
+            <button class="btn waves-effect submitBtn" name="login" id="submit">Login</button>
+        </div>
+        <div class="col s1 m2 l4"></div>
     </div>
 </body>
 </html>

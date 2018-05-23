@@ -1,12 +1,16 @@
 /* MY CSS */
 h1, h2, h3, h4, h5, h6, p, div, span, ol, ul, li, textarea, input, button, a, blockquote, caption, table, tbody, thead, tfoot, tr, th, td, select, option {
-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #2c2c2c;
 }
 p {
     line-height: 1.5;
 }
 input, textarea, select {
-margin-bottom: 4px;
+    margin-bottom: 4px;
+}
+.submitBtn {
+    background-color: #07889b !important;
 }
 .teal-icon-large {
     color: #07889b;
@@ -156,7 +160,7 @@ margin-bottom: 4px;
     display: inline-block;
 }
 .footer-push {
-    height: 100px;
+    height: 80px;
     width: 100%;
 }
 
@@ -194,9 +198,20 @@ margin-bottom: 4px;
     }
 }
 .orange-card {
-    background-color: #07889b !important;
+    background-color: #e37222d0 !important;
     color: white;
 }
 .project-content {
     padding: 10px !important;
+}
+
+/* Login Form */
+.login-form {
+    margin-top: 40px;
+}
+.errorMsg {
+    margin: 0px;
+    font-size: 12px;
+    font-style: italic;
+    color: red;
 }

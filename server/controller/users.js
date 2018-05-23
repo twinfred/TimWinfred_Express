@@ -12,7 +12,7 @@ module.exports = {
                 }
             })
         },
-    getOneUser:
+        getUserById:
         (req, res) => {
             console.log(req.params.id)
             User.findOne({_id: req.params.id}, (err, user) => {
@@ -27,17 +27,13 @@ module.exports = {
         },
      createUser:
         (req, res) => {
-            if(req.body.secret != "SecretCode5498"){
-                res.json({message: "Error", error: "Your secret code was wrong."})
-            }else{
-                User.create(req.body, (err, newUser) => {
-                    if(err){
-                        res.json({message: "Error", error: err});
-                    }else{
-                        res.json({message: "Success", data: newUser});
-                    }
-                })
-            }
+            User.create(req.body, (err, newUser) => {
+                if(err){
+                    res.json({message: "Error", error: err});
+                }else{
+                    res.json({message: "Success", data: newUser});
+                }
+            })
         },
     updateUser:
         (req, res)=>{

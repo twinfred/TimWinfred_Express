@@ -1,28 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>tim winfred = ["Web Developer", "Entrepreneur", "Digital Marketer", "Designer"]</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Full-stack freelance web programmer, software developer and designer in Los Angeles, California.">
+    <meta name="keywords" content="tim winfred, timothy winfred, full stack, web, software, developer, programmer, freelance, full-stack, web programmer, web developer, software developer, software programmer, web designer, back-end, front-end, back-end developer, front-end programmer, timwinfred.com, timwinfred, timothywinfred.com timothywinfred">
+    <meta property="og:site_name" content="TimWinfred.com">
+    <meta property="og:url" content="http://www.timwinfred.com">
+    <meta property="og:title" content='tim winfred = ["Web Developer", "Entrepreneur", "Digital Marketer", "Designer"]'>
+    <meta property="og:description" content="Full-stack freelance web programmer, software developer and designer in Los Angeles, California.">
+    <meta property="og:image" content="/img/tim_professional_photo_fb.jpg">
+    <meta property="og:image:width" content="630">
+    <meta property="og:image:height" content="330">
+    <meta property="og:type" content="website">
+    <meta name="twitter:site" content="timwinfred">
+    <meta name="twitter:url" content="http://www.timwinfred.com">
+    <meta name="twitter:title" content='tim winfred = ["Web Developer", "Entrepreneur", "Digital Marketer", "Designer"]'>
+    <meta name="twitter:description" content="Full-stack freelance web programmer, software developer and designer in Los Angeles, California.">
+    <meta name="twitter:card" content="summary">
+    <meta name="title" content='tim winfred = ["Web Developer", "Entrepreneur", "Digital Marketer", "Designer"]'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="/main.css">
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Side Nav
             var elems = document.querySelectorAll('.sidenav');
             var instances = M.Sidenav.init(elems);
             var instance = M.Sidenav.getInstance(elems);
-            $('.sidenav-triger').click(function(){
-                instance.open();
-            })
 
+            // Top Nav & Next Bar
             var location = 0;
             $(window).scroll(function(){
                 location = $(window).scrollTop()
-                console.log(location)
                 if(location > 160){
                     $('.next-bar').show();
                     $('.sticky-nav').slideDown('fast', function(){
@@ -42,9 +57,16 @@
                     });
                 }
             })
+
+            $(document).on('click', '.profile-photo', function(){
+                $.get("https://api.scryfall.com/cards/random", function(data) {
+                    $('.profile-photo').css('height', )
+                    $('.profile-photo').attr('src', data.image_uris.art_crop);
+                })
+                
+            })
         });
     </script>
-    <title>tim winfred = ["Web Developer", "Entrepreneur", "Digital Marketer", "Designer"]</title>
 </head>
 <body>
     <header>
@@ -88,11 +110,11 @@
         <!-- Profile Photo & Description-->
         <div class="center main-photo">
             <!-- Desktop Photo -->
-            <img class="circle professional-photo z-depth-3 hide-on-med-and-down" src="/img/tim_professional_photo.jpg" alt="tim winfred">
+            <img class="circle profile-photo professional-photo z-depth-3 hide-on-med-and-down" src="/img/tim_professional_photo.jpg" alt="tim winfred">
             <!-- Tablet Photo -->
-            <img class="circle professional-photo z-depth-3 hide-on-med-and-down professional-photo-med" src="/img/tim_professional_photo.jpg" alt="tim winfred">
+            <img class="circle profile-photo professional-photo z-depth-3 hide-on-med-and-down professional-photo-med" src="/img/tim_professional_photo.jpg" alt="tim winfred">
             <!-- Mobile Photo -->
-            <img class="circle professional-photo-small z-depth-2 hide-on-med-and-up" src="/img/tim_professional_photo.jpg" alt="tim winfred">
+            <img class="circle profile-photo professional-photo-small z-depth-2 hide-on-med-and-up" src="/img/tim_professional_photo.jpg" alt="tim winfred">
             <div class="site-title row">
                 <div class="col s1 m1 l2"></div>
                 <h4 class="col s10 m10 l8 center hide-on-small-only">tim = ["Web Developer", "Entrepreneur", "Digital Marketer", "Designer"]</h4>
@@ -109,11 +131,11 @@
                         <div class="card-image">
                             <img src="img/borrow_kingdom.jpg">
                         </div>
-                        <div class="card-content white-text">
-                            <span class="card-title">Borrow Kingdom</span>
-                            <p class="project-details">An item rental system where users can rent "treasures" from other users for a flat daily rate.</p>
+                        <div class="card-content">
+                            <span class="card-title white-text">Borrow Kingdom</span>
+                            <p class="project-details white-text">Rental software where users can rent "treasures" from other users for a flat daily rate.</p>
                             <div class="divider"></div>
-                            <p class="project-languages">Python - Django - MySQL - HTML - CSS</p>
+                            <p class="project-languages white-text">Python - Django - MySQL - HTML - CSS</p>
                         </div>
                     </div>
                 </div>
@@ -122,13 +144,13 @@
                 <div class="col s12 m6 l4">
                     <div class="card teal-card">
                         <div class="card-image">
-                            <img src="img/borrow_kingdom.jpg">
+                            <img src="img/pawprint_fashion.jpg">
                         </div>
-                        <div class="card-content white-text">
-                            <span class="card-title">Borrow Kingdom</span>
-                            <p class="project-details">An item rental system where users can rent "treasures" from other users for a flat daily rate.</p>
+                        <div class="card-content">
+                            <span class="card-title white-text">Pawprint Fashion</span>
+                            <p class="project-details white-text">A print-on-demand eCommerce website that sells animal-inspired merchandise.</p>
                             <div class="divider"></div>
-                            <p class="project-languages">Python - Django - MySQL - HTML - CSS</p>
+                            <p class="project-languages white-text">Wordpress - HTML - CSS</p>
                         </div>
                     </div>
                 </div>
@@ -137,13 +159,13 @@
                 <div class="col s12 l4 hide-on-med-only">
                     <div class="card teal-card">
                         <div class="card-image">
-                            <img src="img/borrow_kingdom.jpg">
+                            <img src="img/tim_winfred_website.jpg">
                         </div>
-                        <div class="card-content white-text">
-                            <span class="card-title">Borrow Kingdom</span>
-                            <p class="project-details">An item rental system where users can rent "treasures" from other users for a flat daily rate.</p>
+                        <div class="card-content">
+                            <span class="card-title white-text">This Website</span>
+                            <p class="project-details white-text">Learn about the site you are currently on and the languages it's built with.</p>
                             <div class="divider"></div>
-                            <p class="project-languages">Python - Django - MySQL - HTML - CSS</p>
+                            <p class="project-languages white-text">Node.js - Express - MongoDB - JavaScript - HTML - CSS</p>
                         </div>
                     </div>
                 </div>
@@ -158,7 +180,7 @@
                 <div class="col s6 m6 l3">
                     <div class="card orange-card">
                         <div class="card-content center project-content">
-                            <h6>All Projects</h6>
+                            <h6 class="white-text">All Projects</h6>
                         </div>
                     </div>
                 </div>
@@ -167,7 +189,7 @@
                 <div class="col s6 m6 l3">
                     <div class="card orange-card">
                         <div class="card-content center project-content">
-                            <h6>Experience</h6>
+                            <h6 class="white-text">Experience</h6>
                         </div>
                     </div>
                 </div>
@@ -176,7 +198,7 @@
                 <div class="col s6 m6 l3">
                     <div class="card orange-card">
                         <div class="card-content center project-content">
-                            <h6>About Me</h6>
+                            <h6 class="white-text">About Me</h6>
                         </div>
                     </div>
                 </div>
@@ -185,7 +207,7 @@
                 <div class="col s6 m6 l3">
                     <div class="card orange-card">
                         <div class="card-content center project-content">
-                            <h6>Contact</h6>
+                            <h6 class="white-text">Contact</h6>
                         </div>
                     </div>
                 </div>
@@ -197,7 +219,7 @@
         <a href="#!">
             <div class="next-bar waves-effect" style="display: none">
                 <div class="next-text">
-                    <h6>Up Next: <span style="font-weight: bold">Experience&nbsp;</span></h6>
+                    <h6>Up Next: <span style="font-weight: bold" class="white-text">Experience&nbsp;</span></h6>
                     <p><i class="material-icons next-arrow">arrow_forward</i></p>
                 </div>
             </div>
