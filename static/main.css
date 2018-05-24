@@ -205,6 +205,35 @@ input, textarea, select {
     padding: 10px !important;
 }
 
+/* Chat Availble */
+.status-icon {
+    height: 60px;
+    width: 60px;
+    position: fixed;
+    right: 30px;
+    bottom: 65px;
+    z-index: 99;
+}
+.status-icon:hover {
+    box-shadow: #747474 0px 0px 12px !important;
+    cursor: pointer;
+}
+.horizAlign {
+    margin: 3px auto 0px auto;
+}
+.online-tooltip {
+    height: 35px;
+    width: 285px;
+    position: fixed;
+    right: 84px;
+    bottom: 78px;
+    background-color: #747474d7;
+}
+.online-tooltip p {
+    width: 100%;
+    text-align: center;
+}
+
 /* Login Form */
 .login-form {
     margin-top: 40px;
@@ -214,4 +243,25 @@ input, textarea, select {
     font-size: 12px;
     font-style: italic;
     color: red;
+}
+/* Admin */
+.brand-logo-admin {
+    width: 120px;
+    padding-top: 20px !important;
+}
+.chat-box {
+    width: 120px;
+    height: 45px;
+    margin: 0px auto;
+}
+.chat-box:hover {
+    box-shadow: #747474 0px 0px 12px !important;
+    cursor: pointer;
+}
+.chat-box p {
+    text-align: center;
+    width: 100%;
+}
+.note {
+    font-size: 12px;
 }

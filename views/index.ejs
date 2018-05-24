@@ -22,6 +22,7 @@
     <meta name="twitter:card" content="summary">
     <meta name="title" content='tim winfred = ["Web Developer", "Entrepreneur", "Digital Marketer", "Designer"]'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
@@ -36,6 +37,7 @@
 
             // Top Nav & Next Bar
             var location = 0;
+            var tooltipCount = 0;
             $(window).scroll(function(){
                 location = $(window).scrollTop()
                 if(location > 160){
@@ -43,14 +45,31 @@
                     $('.sticky-nav').slideDown('fast', function(){
                         $('.sticky-logo').fadeIn('fast');
                         $('.sticky-menu').fadeIn('fast');
+                        $('.status-icon').fadeIn('fast', function(){
+                            if(tooltipCount == 0){
+                                $('.online-tooltip').fadeIn('fast');
+                            }
+                        })
                         $('.top-logo').fadeOut('fast');
                         $('.top-menu').fadeOut('fast');
+                        function hideOnlineTooltip(){
+                            $('.online-tooltip').fadeOut('fast', function(){
+                                tooltipCount++;
+                            });
+                        }
+                        if(tooltipCount == 0){
+                            setTimeout(function(){
+                                hideOnlineTooltip();
+                            }, 6000);
+                        }
                     });
                 }
                 if(location < 100){
                     $('.next-bar').fadeOut('fast');
                     $('.sticky-logo').fadeOut('fast');
                     $('.sticky-menu').fadeOut('fast');
+                    $('.online-tooltip').fadeOut('fast');
+                    $('.status-icon').fadeOut('fast');
                     $('.sticky-nav').slideUp('fast', function(){
                         $('.top-logo').show('fast');
                         $('.top-menu').fadeIn('fast');
@@ -224,6 +243,26 @@
                 </div>
             </div>
         </a>
+        <!-- Chat Available -->
+        <% if(online){ %>
+            <div class="status-icon circle green valign-wrapper online-status" style="display: none">
+                <div class="horizAlign">
+                    <i class="material-icons next-arrow white-text small">chat_bubble</i>
+                </div>
+            </div>
+            <div class="online-tooltip valign-wrapper" style="display: none">
+                <p class="white-text">Tim's online! Send him a chat message.</p>
+            </div>
+        <% }else{ %>
+            <div class="status-icon circle blue valign-wrapper offline-status" style="display: none">
+                <div class="horizAlign">
+                    <i class="material-icons next-arrow white-text small">email</i>
+                </div>
+            </div>
+            <div class="online-tooltip valign-wrapper" style="display: none">
+                <p class="white-text">Would you like to send Tim an email?</p>
+            </div>
+        <% } %>
     </footer>
 </body>
 </html>

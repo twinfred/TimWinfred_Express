@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Admin Portal</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Full-stack freelance web programmer, software developer and designer in Los Angeles, California.">
+    <meta name="keywords" content="tim winfred, timothy winfred, full stack, web, software, developer, programmer, freelance, full-stack, web programmer, web developer, software developer, software programmer, web designer, back-end, front-end, back-end developer, front-end programmer, timwinfred.com, timwinfred, timothywinfred.com timothywinfred">
+    <meta property="og:site_name" content="TimWinfred.com">
+    <meta property="og:url" content="http://www.timwinfred.com">
+    <meta property="og:title" content='tim winfred = ["Web Developer", "Entrepreneur", "Digital Marketer", "Designer"]'>
+    <meta property="og:description" content="Full-stack freelance web programmer, software developer and designer in Los Angeles, California.">
+    <meta property="og:image" content="/img/tim_professional_photo_fb.jpg">
+    <meta property="og:image:width" content="630">
+    <meta property="og:image:height" content="330">
+    <meta property="og:type" content="website">
+    <meta name="twitter:site" content="timwinfred">
+    <meta name="twitter:url" content="http://www.timwinfred.com">
+    <meta name="twitter:title" content='tim winfred = ["Web Developer", "Entrepreneur", "Digital Marketer", "Designer"]'>
+    <meta name="twitter:description" content="Full-stack freelance web programmer, software developer and designer in Los Angeles, California.">
+    <meta name="twitter:card" content="summary">
+    <meta name="title" content='tim winfred = ["Web Developer", "Entrepreneur", "Digital Marketer", "Designer"]'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/main.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Side Nav
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems);
+            var instance = M.Sidenav.getInstance(elems);
+        });
+        // Turn Chat On
+        function turnChatOn(){
+            console.log('turning on')
+            var id = $('#turnChatOn').attr('userId')
+            console.log(id)
+            $.ajax({
+                url: '/api/users/'+id+'/chat-on',
+                type: 'PUT',
+                success: function(result){
+                    if(result['message'] == "Success"){
+                        location.reload();
+                    }
+                }
+            })
+        }
+        // Turn Chat Off
+        function turnChatOff(){
+            console.log('turning off')
+            var id = $('#turnChatOff').attr('userId')
+            $.ajax({
+                url: '/api/users/'+id+'/chat-off',
+                type: 'PUT',
+                success: function(result){
+                    if(result['message'] == "Success"){
+                        location.reload();
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <!-- Top Nav -->
+        <nav class="transparent z-depth-0 top-nav">
+            <div class="nav-wrapper">
+                <a href="/"><img class="brand-logo center hide-on-small-only top-logo brand-logo-admin" src="/img/tim-winfred-logo.png" alt="tim winfred"></a>
+                <a href="/"><img class="brand-logo center hide-on-med-and-up small-logo top-logo" src="/img/tim-winfred-logo.png" alt="tim winfred logo"></a>
+                <i data-target="slide-out" class="material-icons teal-icon teal-icon-large left hide-on-small-only sidenav-trigger top-menu">menu</i>
+                <i data-target="slide-out" class="material-icons teal-icon teal-icon-small left hide-on-med-and-up sidenav-trigger top-menu">menu</i>
+            </div>
+        </nav>
+        <!-- Sticky Nav -->
+        <nav class="z-depth-0 sticky-nav" style="display: none">
+            <div class="nav-wrapper">
+                <a href="/"><img class="brand-logo center hide-on-small-only sticky-logo" src="/img/tim-winfred-logo.png" alt="tim winfred" style="display: none"></a>
+                <a href="/"><img class="brand-logo center hide-on-med-and-up small-logo sticky-logo" src="/img/tim-winfred-logo.png" alt="tim winfred logo" style="display: none"></a>
+                <i data-target="slide-out" class="material-icons teal-icon teal-icon-large left hide-on-small-only sidenav-trigger sticky-menu" style="display: none">menu</i>
+                <i data-target="slide-out" class="material-icons teal-icon teal-icon-small left hide-on-med-and-up sidenav-trigger sticky-menu" style="display: none">menu</i>
+            </div>
+        </nav>
+        <!-- Slide Out Nav -->
+        <ul id="slide-out" class="sidenav">
+            <li><div class="user-view">
+                <img class="menu-logo center" src="/img/tim-winfred-logo.png" alt="tim winfred logo">
+            </div></li>
+            <li><a class="waves-effect" href="/logout">Logout</a></li>
+        </ul>
+    </header>
+    <main>
+        <% if(!online){ %>
+            <div class="chat-box valign-wrapper red" id="turnChatOn"userId="<%= id %>" onclick="turnChatOn()">
+                <p class="white-text">Chat Offline</p>
+            </div>
+            <div class="center note">
+                <p>Click to turn chat on</p>
+            </div>
+        <% }else{ %>
+            <div class="chat-box valign-wrapper green" id="turnChatOff" userId="<%= id %>" onclick="turnChatOff()">
+                <p class="white-text">Chat Online</p>
+            </div>
+            <div class="center note">
+                <p>Click to turn chat off</p>
+            </div>
+        <% } %>
+    </main>
+</body>
+</html>

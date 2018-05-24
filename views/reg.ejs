@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Register</title>
+</head>
+<body>
+    <h2>Register</h2>
+    <% if(messages.error) { %>
+        <p>Error(s):</p>
+        <ul>
+        <% for (var x in messages.error) { %>
+            <li><%= messages.error[x] %></li>
+        <% } %>
+        </ul>
+    <% } %>
+    <form action="/register" method="post">
+    <table>
+        <tr>
+            <td>First Name: </td>
+            <td><input type="text" name="first_name" id="first_name"></td>
+        </tr>
+        <tr>
+            <td>Last Name: </td>
+            <td><input type="text" name="last_name" id="last_name"></td>
+        </tr>
+        <tr>
+            <td>Email: </td>
+            <td><input type="email" name="email" id="email"></td>
+        </tr>
+        <tr>
+            <td>Password: </td>
+            <td><input type="password" name="password" id="password"></td>
+        </tr>
+        <tr>
+            <td>Password Confirmation: </td>
+            <td><input type="password" name="passConf" id="passConf"></td>
+        </tr>
+    </table>
+    <input type="submit" value="Register">
+    </form>
+</body>
+</html>

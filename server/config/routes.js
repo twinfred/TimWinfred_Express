@@ -4,11 +4,13 @@ const pageController = require('./../controller/pages');
 
 module.exports = function(app){
     // User API
-    app.get('/api/users', userController.getUsers);
+    // app.get('/api/users', userController.getUsers);
     app.get('/api/users/id/:id', userController.getUserById);
-    app.post('/api/users', userController.createUser);
-    app.put('/api/users/:id', userController.updateUser);
-    app.delete('/api/users/:id', userController.destroyUser);
+    // app.post('/api/users', userController.createUser);
+    // app.put('/api/users/:id', userController.updateUser);
+    // app.delete('/api/users/:id', userController.destroyUser);
+    app.put('/api/users/:id/chat-on', userController.turnChatOn);
+    app.put('/api/users/:id/chat-off', userController.turnChatOff);
     // Chat API
     app.get('/api/chats', chatController.getChats);
     app.get('/api/chats/:id', chatController.getOneChat);
@@ -19,6 +21,10 @@ module.exports = function(app){
     app.get('/', pageController.index);
     app.get('/login/admin_access', pageController.login);
     app.post('/login', pageController.loginPost);
+    // app.get('/reg', pageController.register);
+    // app.post('/register', pageController.registerPost);
+    app.get('/admin', pageController.admin);
+    app.get('/logout', pageController.logout);
     app.get('*', (req, res)=>{
         res.redirect('/');
     })
