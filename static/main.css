@@ -34,6 +34,9 @@ input, textarea, select {
     padding: 10px 0px 10px 0px;
     height: 140px !important;
 }
+header {
+    margin-bottom: 55px;
+}
 .menu-logo {
     height: 70px;
     margin: 0 auto;
@@ -70,7 +73,6 @@ input, textarea, select {
         url('img/downtow-los-angeles.jpg');
     background-size: cover;
     padding: 20px 0px 180px 0px;
-    margin-top: 40px;
 }
 .main-photo-small {
     background:
@@ -92,6 +94,9 @@ input, textarea, select {
     .professional-photo-med {
         display: none;
     }
+    .projectCard {
+        min-height: 505px;
+    }
 }
 @media screen and (max-width: 600px){
     .professional-photo-med {
@@ -105,6 +110,9 @@ input, textarea, select {
         width: 35%;
         border: 4px solid white;
     }
+    .projectCard {
+        min-height: 578px;
+    }
 }
 .professional-photo-small {
     width: 50%;
@@ -113,9 +121,9 @@ input, textarea, select {
 .site-title {
     margin-top: 20px;
 }
-.site-title h4, .site-title h5 {
+.site-title h4, .site-title h5, .glow-txt {
     color: #2c2c2c;
-    text-shadow: white 0px 0px 20px;   
+    text-shadow: white 0px 0px 20px, white 0px 0px 20px, white 0px 0px 20px, white 0px 0px 20px;   
 }
 .site-title h4 {
     font-size: 2.6rem !important;
@@ -130,7 +138,7 @@ input, textarea, select {
     left: 0;
     background-color: rgba(255, 255, 255, 0.959) !important;
     box-shadow: #c7c7c7 0px 0px 12px !important;
-    z-index: 100;
+    z-index: 99;
 }
 .sticky-logo {
     width: 100px;
@@ -190,6 +198,32 @@ input, textarea, select {
     margin-bottom: 0px !important;
     font-size: .8rem !important;
 }
+.underline {
+    text-decoration: underline;
+}
+
+/* Education & Training + Professional Experience */
+.secondaryP {
+    margin-top: 18px !important;
+}
+
+.exp-photo {
+    background-image: 
+        linear-gradient(
+            rgb(255, 255, 255) 20%, 
+            #ffffff00,
+            rgb(255, 255, 255) 90% 
+        ),
+        url('img/StockSnap_EAVNVUIK49.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.glow-txt {
+    text-shadow: white 0px 0px 20px, white 0px 0px 20px, white 0px 0px 20px, white 0px 0px 20px;
+    color: #2c2c2c;
+}
 
 /* Jump To */
 @media screen and (min-width: 993px) {
@@ -198,21 +232,21 @@ input, textarea, select {
     }
 }
 .orange-card {
-    background-color: #e37222d0 !important;
+    background-color: #e37222 !important;
     color: white;
 }
 .project-content {
     padding: 10px !important;
 }
 
-/* Chat Availble */
+/* Chat/Email Status */
 .status-icon {
     height: 60px;
     width: 60px;
     position: fixed;
     right: 30px;
     bottom: 65px;
-    z-index: 99;
+    z-index: 98;
 }
 .status-icon:hover {
     box-shadow: #747474 0px 0px 12px !important;
@@ -233,16 +267,108 @@ input, textarea, select {
     width: 100%;
     text-align: center;
 }
+.online-box, .offline-box {
+    width: 300px;
+    position: fixed;
+    right: 0;
+    bottom: 55px;
+    background-color: #ffffffd7;
+    box-shadow: #747474 0px 0px 12px !important;
+    padding: 15px;
+    z-index: 100;
+}
+.online-box {
+    height: 300px;
+}
+.chat-wrapper, .chat-msg {
+    width: 100%;
+    background-color: white;
+    margin-bottom: 5px;
+    padding: 6px;
+    box-shadow: #cecece 0px 0px 8px inset !important;
+}
+.chat-wrapper {
+    height: 160px;
+    overflow-y: auto;
+}
+.chat-msg {
+    height: 68px;
+}
+.online-box a p {
+    color: #e37222 !important;
+    margin-top: 10px;
+}
+.messageHolder p {
+    padding: 4px 10px;
+    display: inline-block;
+    border-radius: 3px;
+}
+.messageHolder {
+    margin-bottom: 4px;
+    flex: 1;
+}
+.chat-msg textarea {
+    border: none;
+    resize: none;
+    height: 56px;
+    box-shadow: none;
+    outline: none;
+}
+.ui-dialog {
+    background-color: rgba(255, 255, 255, 0.938);
+    padding: 15px;
+    box-shadow: #747474 0px 0px 12px !important;
+}
+.ui-dialog-titlebar {
+    height: 23px;
+}
+.ui-dialog-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #e37222;
+}
+.ui-dialog-titlebar-close {
+    float: right;
+    text-decoration: none;
+    text-align: center;
+    letter-spacing: .5px;
+    outline: 0;
+    border: none;
+    border-radius: 2px;
+    padding: 0px 5px;
+    text-transform: uppercase;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 22px;
+    width: 60px;
+    line-height: 22px;
+    font-size: 13px;
+    color: #2c2c2c;
+    /* background-color: #07889b !important; */
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+}
+.dialog p {
+    margin-top: 8px;
+    color: #747474;
+}
+.offline-box form textarea {
+    font-size: 13px;
+}
+.offline-box button {
+    margin-top: 12px;
+}
+.offline-box a p {
+    color: #e37222 !important;
+}
 
 /* Login Form */
 .login-form {
     margin-top: 40px;
 }
 .errorMsg {
-    margin: 0px;
+    margin: 0px 0px 5px 0px;
     font-size: 12px;
     font-style: italic;
-    color: red;
+    color: red !important;
 }
 /* Admin */
 .brand-logo-admin {
@@ -264,4 +390,22 @@ input, textarea, select {
 }
 .note {
     font-size: 12px;
+}
+
+/* Form Placeholder Text */
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #07889b;
+    font-size: 16px;
+}
+::-moz-placeholder { /* Firefox 19+ */
+    color: #07889b;
+    font-size: 16px;
+}
+:-ms-input-placeholder { /* IE 10+ */
+    color: #07889b;
+    font-size: 16px;
+}
+:-moz-placeholder { /* Firefox 18- */
+    color: #07889b;
+    font-size: 16px;
 }

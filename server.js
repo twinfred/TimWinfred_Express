@@ -18,9 +18,60 @@ app.use(session({
 app.use(flash());
 
 require('./server/config/mongoose'); // DB
+const Chat = require('./server/models/chat');
+
 require('./server/config/routes')(app); // ROUTES
 
-// REQUIRE SOCKET ROUTES
+// SOCKET.IO
+var connections = [];
+var timsSocket;
+
+io.sockets.on('connection', function(socket){
+    connections.push({socket: socket});
+    // Disconnect
+    socket.on('disconnect', function(data){
+        connections.splice(connections.indexOf({socket: socket}), 1);
+    });
+
+    // Tim Online
+    socket.on('tim_online', function(socketId){
+        timsSocket = socketId;
+
+    })
+
+    // New Chat
+    socket.on('new_chat', function(chat_id, socketId, callback){
+        callback();
+        Chat.findOne({_id: chat_id}, (err, chat) =>{
+            io.to(socketId).emit('chat_messages', chat['messages']);
+            io.to(timsSocket).emit('new_message', chat, socketId);
+        })
+    })
+
+    // New Individual Message from Admin
+    socket.on('individual_msg', function(socket, msg){
+        Chat.findOne({socket: socket}, (err, chat) => {
+            Chat.update(chat, {$push: {messages: {content: msg, user: "AdminTim"}}}, (err)=>{
+                Chat.findOne({socket: socket}, (err, chat) => {
+                    io.to(socket).emit('chat_messages', chat['messages']);
+                    io.to(timsSocket).emit('chat_messages', chat['messages'], socket);
+                })
+            })
+        })
+    })
+
+    // New Individual Message from User
+    socket.on('send_msg', function (socket, msg){
+        Chat.findOne({socket: socket}, (err, chat) => {
+            Chat.update(chat, {$push: {messages: {content: msg, user: chat['messages'][0]['user']}}}, (err)=>{
+                Chat.findOne({socket: socket}, (err, chat) => {
+                    io.to(socket).emit('chat_messages', chat['messages']);
+                    io.to(timsSocket).emit('chat_messages', chat['messages'], socket);
+                })
+            })
+        })
+    })
+});
 
 server.listen(8000, function(){
     console.log("Server running on port 8000.");

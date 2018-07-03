@@ -25,13 +25,20 @@ module.exports = {
                 }
             })
         },
+        
     createChat:
         (req, res) => {
-            Chat.create(req.body, (err, newChat) => {
+            console.log(req.body)
+            Chat.create({sender_fname: req.body.chat_first_name, sender_lname: req.body.chat_last_name, sender_email: req.body.chat_email, socket: req.body.chat_socket}, (err, newChat) => {
                 if(err){
                     res.json({message: "Error", error: err});
                 }else{
-                    res.json({message: "Success", data: newChat});
+                    Chat.update(newChat, {$push: {messages: {content: req.body.chat_message, user: req.body.chat_first_name}}}, (err) => {
+                        Chat.find({_id: newChat._id}, (err, chat) => {
+                            console.log(chat);
+                            res.json({message: "Success", data: chat});
+                        })
+                    });
                 }
             })
         },

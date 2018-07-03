@@ -23,16 +23,90 @@
     <meta name="title" content='tim winfred = ["Web Developer", "Entrepreneur", "Digital Marketer", "Designer"]'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="/main.css">
+    <audio id="doorbell" src="/doorbell.mp3" preload="auto"></audio>
+    <audio id="click" src="/click.mp3" preload="auto"></audio>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const doorbell = document.getElementById('doorbell');
+            const click = document.getElementById('click');
             // Side Nav
             var elems = document.querySelectorAll('.sidenav');
             var instances = M.Sidenav.init(elems);
             var instance = M.Sidenav.getInstance(elems);
+
+            // SOCKET Connection
+            var socket = io.connect();
+            var socketId;
+            var chatsAvailable = [];
+            socket.on('connect', function(){
+                socketId = socket.id;
+                console.log(socket.id);
+                socket.emit('tim_online', socketId)
+            })
+
+            function getColor() {
+                var letters = 'BCDEF'.split('');
+                var color = '#';
+                for (var i = 0; i < 6; i++ ) {
+                    color += letters[Math.floor(Math.random() * letters.length)];
+                }
+                return color;
+            }
+
+            socket.on('new_message', function(newChat, socketId){
+                console.log(newChat);
+                doorbell.play();
+                let thisChat = {};
+                thisChat['id'] = newChat['_id']
+                thisChat['name'] = newChat['sender_fname'] + ' ' + newChat['sender_lname'];
+                thisChat['email'] = newChat['sender_email'];
+                thisChat['color'] = getColor();
+                thisChat['socketId'] = socketId;
+                thisChat['messages'] = []
+                chatMsg = {};
+                chatMsg['name'] = newChat['sender_fname'];
+                chatMsg['content'] = newChat['messages'][0]['content'];
+                thisChat['messages'].push(chatMsg);
+                chatsAvailable.push(thisChat);
+                console.log("Available Chats", chatsAvailable);
+                let chatMessages = '';
+                for(var i = 0; i < chatsAvailable.length; i++){
+                    chatMessages += "<div class='adminChat-wrapper col s12 m6 l4'><h5 class='chatName'> Chat with "+ chatsAvailable[i]['name'] +"</h5><div class='chat-wrapper chat"+ chatsAvailable[i]['socketId'] +"' chatcolor="+ chatsAvailable[i]['color'] +"><div class='messageHolder' style='text-align: right'><p style='background-color: "+chatsAvailable[i]['color']+"'><span style='font-weight: bold'>"+ chatsAvailable[i]['messages'][0]['name'] +":</span> "+ chatsAvailable[i]['messages'][0]['content'] +"</p></div></div><div class='chat-msg'><textarea class='chatText' id='"+ chatsAvailable[i]['socketId'] +"'></textarea></div><button socketid='"+ chatsAvailable[i]['socketId'] +"' class='btn-small waves-effect submitBtn chatSubmitBtn right'><i class='material-icons next-arrow white-text small'>send</i></button></div>"
+                }
+                $('.chatsAvailable').html(chatMessages);
+            })
+
+            $(document).on('click', '.chatSubmitBtn', function(){
+                let thisSocket = this.getAttribute('socketid');
+                let thisMsg = $('#'+thisSocket).val();
+                socket.emit('individual_msg', thisSocket, thisMsg);
+                $('#'+thisSocket).val('')
+            })
+
+            socket.on('chat_messages', function(messages, socket){
+                click.play();
+                console.log('messages:', messages);
+                console.log('socket', socket)
+                console.log("this", $('.chat'+socket))
+                // let chatColor = 'red';
+                let chatColor = $('.chat'+socket).attr('chatcolor');
+                let chatMessages = ''
+                for(var i = 0; i < messages.length; i++){
+                    if(messages[i]['user'] !== "AdminTim"){
+                        chatMessages += "<div class='messageHolder' style='text-align: right'><p style='background-color: "+ chatColor +"'><span style='font-weight: bold'>"+ messages[i]['user'] +":</span> "+ messages[i]['content'] +"</p></div>";
+                    }else{
+                        chatMessages += "<div class='messageHolder'><p style='background-color: rgb(143, 245, 143)'><span style='font-weight: bold'>You: </span> "+ messages[i]['content'] +"</p></div>";
+                    }
+                }
+                console.log(chatMessages)
+                $('.chat'+socket).html(chatMessages);
+            })
+
         });
         // Turn Chat On
         function turnChatOn(){
@@ -109,6 +183,7 @@
                 <p>Click to turn chat off</p>
             </div>
         <% } %>
+        <div class="chatsAvailable row"></div>
     </main>
 </body>
 </html>

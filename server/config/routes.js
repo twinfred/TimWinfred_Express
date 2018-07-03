@@ -19,6 +19,9 @@ module.exports = function(app){
     app.delete('/api/chats/:id', chatController.destroyChat);
     // Pages
     app.get('/', pageController.index);
+    app.get('/projects', pageController.projects);
+    app.get('/experience', pageController.experience);
+    app.get('/about', pageController.about);
     app.get('/login/admin_access', pageController.login);
     app.post('/login', pageController.loginPost);
     // app.get('/reg', pageController.register);

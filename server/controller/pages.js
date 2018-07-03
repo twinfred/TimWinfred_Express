@@ -17,6 +17,39 @@ module.exports = {
                 }
             })
         },
+    projects:
+        (req, res) => {
+            User.findOne({_id: '5b060037d478e404f0c76c66'}, (err, user)=>{
+                if(user){
+                    var status = {
+                        online: user.online,
+                    }
+                    res.render("projects", status);
+                }
+            })
+        },
+    experience:
+        (req, res) => {
+            User.findOne({_id: '5b060037d478e404f0c76c66'}, (err, user)=>{
+                if(user){
+                    var status = {
+                        online: user.online,
+                    }
+                    res.render("experience", status);
+                }
+            })
+        },
+    about:
+        (req, res) => {
+            User.findOne({_id: '5b060037d478e404f0c76c66'}, (err, user)=>{
+                if(user){
+                    var status = {
+                        online: user.online,
+                    }
+                    res.render("about", status);
+                }
+            })
+        },
     login:
         (req, res) => {
             res.render("login");

@@ -257,7 +257,7 @@
         });
     </script>
 </head>
-<body>
+<body class="exp-photo">
     <header>
         <!-- Top Nav -->
         <nav class="transparent z-depth-0 top-nav">
@@ -296,93 +296,152 @@
         </ul>
     </header>
     <main>
-        <!-- Profile Photo & Description-->
-        <div class="center main-photo">
-            <!-- Desktop Photo -->
-            <img class="circle profile-photo professional-photo z-depth-3 hide-on-med-and-down" src="/img/tim_professional_photo.jpg" alt="tim winfred">
-            <!-- Tablet Photo -->
-            <img class="circle profile-photo professional-photo z-depth-3 hide-on-med-and-down professional-photo-med" src="/img/tim_professional_photo.jpg" alt="tim winfred">
-            <!-- Mobile Photo -->
-            <img class="circle profile-photo professional-photo-small z-depth-2 hide-on-med-and-up" src="/img/tim_professional_photo.jpg" alt="tim winfred">
-            <div class="site-title row">
-                <div class="col s1 m1 l2"></div>
-                <h4 class="col s10 m10 l8 center hide-on-small-only">tim = "Full-Stack Web Developer"</h4>
-                <h5 class="col s10 m10 l8 center hide-on-med-and-up">tim = "Full-Stack Web Developer"</h5>
-                <div class="col s1 m1 l2"></div>
+        <!-- Education -->
+        <div class="row">
+            <div class="col m2 l3"></div>
+            <div class="col s12 m8 l6">
+                <h4 class="center section-head glow-txt">Education &amp; Training:</h4>
+                <div class="row recent-projects">
+                    <div class="col s12">
+                        <div class="card teal-card experienceCard">
+                            <div class="card-content">
+                                <span class="card-title white-text">Full-Stack Software Engineering Certification</span>
+                                <h6 class="white-text">Coding Dojo&nbsp;&nbsp;|&nbsp;&nbsp;2018</h6>
+                                <p class="project-details white-text">Burbank, CA</p>
+                                <div class="divider"></div>
+                                <p class="project-details white-text secondaryP">The Coding Dojo curriculum consisted of three full stacks, teaching Python, Java and MEAN on the back-end and HTML, CSS3 and JavaScript on the front.</p>
+                                <p class="project-details white-text secondaryP">Over 1000 hours of hands-on coding experience, including three full-sized projects and more than 50 mini applications.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12">
+                        <div class="card teal-card experienceCard">
+                            <div class="card-content">
+                                <span class="card-title white-text">Bachelor of Science, Advertising</span>
+                                <h6 class="white-text">San Jose State Univeristy&nbsp;&nbsp;|&nbsp;&nbsp;2012</h6>
+                                <p class="project-details white-text">San Jose, CA</p>
+                                <div class="divider"></div>
+                                <p class="project-details white-text secondaryP"><span class="white-text" style="font-weight: bold">Major:</span> Advertising</p>
+                                <p class="project-details white-text secondaryP"><span class="white-text" style="font-weight: bold">Academic Focus:</span> Graphic Design</p>
+                                <p class="project-details white-text secondaryP"><span class="white-text" style="font-weight: bold">Memberships:</span> Spartan Advertising Club, Sigma Nu Fraternity</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <!-- Recent Projects -->
-        <h5 class="center section-head">Recent Projects:</h5>
-        <div class="row recent-projects">
-            <a href="http://magicreviewer.com">
-                <div class="col s12 m6 l3">
-                    <div class="card teal-card projectCard">
-                        <div class="card-image">
-                            <img src="img/magic_reviewer.jpg">
-                        </div>
-                        <div class="card-content">
-                            <span class="card-title white-text">Magic Reviewer</span>
-                            <p class="project-details white-text">Gamified web application using the Scryfall API in which users review Magic: The Gathering playing cards and earn points for each review.</p>
-                            <div class="divider"></div>
-                            <p class="project-languages white-text">Java - Spring - Tomcat - MySQL - Bootstrap - JavaScript - HTML5 - CSS3 - APIs &amp; Ajax</p>
-                            <p class="project-languages white-text right-align"><a class="white-text underline" href="http://magicreviewer.com">Visit Site</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a class="white-text underline" href="https://github.com/twinfred/SpringBoot/tree/master/magicreviewer">View Code</a></p>
-                        </div>
-                    </div>
-                </div>
-            </a>
-            <a href="http://borrowkingdom.com">
-                <div class="col s12 m6 l3">
-                    <div class="card teal-card projectCard">
-                        <div class="card-image">
-                            <img src="img/borrow_kingdom.jpg">
-                        </div>
-                        <div class="card-content">
-                            <span class="card-title white-text">Borrow Kingdom</span>
-                            <p class="project-details white-text">Share economy-inspired web application where users rent tangible items from other users for a flat daily rate, processed using the Stripe API.</p>
-                            <div class="divider"></div>
-                            <p class="project-languages white-text">Python - Django - MySQL - HTML5 - CSS3</p>
-                            <p class="project-languages white-text right-align"><a class="white-text underline" href="http://borrowkingdom.com">Demo Video</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a class="white-text underline" href="https://github.com/twinfred/BorrowKingdom">View Code</a></p>
-                        </div>
-                    </div>
-                </div>
-            </a>
-            <a href="https://github.com/twinfred/TimWinfred_Express">
-                <div class="col s12 m6 l3">
-                    <div class="card teal-card projectCard">
-                        <div class="card-image">
-                            <img src="img/tim_winfred_website.jpg">
-                        </div>
-                        <div class="card-content">
-                            <span class="card-title white-text">My Portfolio Site</span>
-                            <p class="project-details white-text">Web development portfolio website, with a real-time chat feature that allows users to contact the site admin when they are online.</p>
-                            <div class="divider"></div>
-                            <p class="project-languages white-text">Node.js - Express.js - Socket.io - EJS - MongoDB - JavaScript - HTML5 - CSS3</p>
-                            <p class="project-languages white-text right-align"><a class="white-text underline" href="https://github.com/twinfred/TimWinfred_Express">View Code</a></p>
-                        </div>
-                    </div>
-                </div>
-            </a>
-            <a href="https://pawprintfashion.com">
-                    <div class="col s12 m6 l3">
-                        <div class="card teal-card projectCard">
-                            <div class="card-image">
-                                <img src="img/pawprint_fashion.jpg">
-                            </div>
+        
+        <!-- Professional Experience -->
+        <div class="row">
+            <div class="col m2 l3"></div>
+            <div class="col s12 m8 l6">
+                <h4 class="center section-head glow-txt">Professional Experience:</h4>
+                <div class="row recent-projects">
+                    <div class="col s12">
+                        <div class="card teal-card experienceCard">
                             <div class="card-content">
-                                <span class="card-title white-text">Pawprint Fashion</span>
-                                <p class="project-details white-text">Print-on-demand eCommerce website that sells animal-inspired merchandise using the WooCommerce and Printful APIs. </p>
+                                <span class="card-title white-text">Director of Marketing Operations</span>
+                                <h6 class="white-text">Q.Digital, Inc.&nbsp;&nbsp;|&nbsp;&nbsp;2015 - 2018</h6>
+                                <p class="project-details white-text">San Francisco, CA</p>
                                 <div class="divider"></div>
-                                <p class="project-languages white-text">Wordpress - HTML5 - CSS3 - APIs </p>
-                                <p class="project-languages white-text right-align"><a class="white-text underline" href="https://pawprintfashion.com">Visit Site</a></p>
+                                <p class="project-details white-text secondaryP">Managed the marketing team and lead all digital marketing campaigns for all brand partners, including 20th Century Fox, Alaska Airlines, AT&nbsp;T, Corona USA, Fox Searchlight Pictures, HBO, Las Vegas Convention and Visitors Authority, Lexus, San Francisco Travel Association, Sony Pictures, Stoli Vodka, Target, Trivago, Universal Pictures and Walt Disney Pictures, among others.</p>
+                                <p class="project-details white-text secondaryP"><span class="white-text" style="font-weight: bold">Highlight:</span> Increased online voting in the 2018 Queerty.com Awards – "The Queerties" – by more 60% from the 2017 vote count, from 296,000 to over 500,000.</p>
                             </div>
                         </div>
                     </div>
-                </a>
+                    <div class="col s12">
+                        <div class="card teal-card experienceCard">
+                            <div class="card-content">
+                                <span class="card-title white-text">Social Media Specialist</span>
+                                <h6 class="white-text">Shutterfly, Inc.&nbsp;&nbsp;|&nbsp;&nbsp;2015</h6>
+                                <p class="project-details white-text">Santa Clara, CA</p>
+                                <div class="divider"></div>
+                                <p class="project-details white-text secondaryP">Managed seven-figure quarterly budgets for Facebook advertising, Pinterest advertising, social media sweepstakes and video content promotion. Created weekly social media content calendars for nearly 1 million fans across Facebook, Instagram, Pinterest and Twitter.</p>
+                                <p class="project-details white-text secondaryP"><span class="white-text" style="font-weight: bold">Highlight:</span> Implemented a Pinterest advertising budget plan that increased revenue during peak holiday times and reduced Tiny Prints' cost-per-conversion by more than 90% in less than two months.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12">
+                        <div class="card teal-card experienceCard">
+                            <div class="card-content">
+                                <span class="card-title white-text">Founder &amp; Editor-In-Chief</span>
+                                <h6 class="white-text">Dragaholic.com&nbsp;&nbsp;|&nbsp;&nbsp;2013 - 2015</h6>
+                                <p class="project-details white-text"></p>
+                                <div class="divider"></div>
+                                <p class="project-details white-text secondaryP">Built and maintained an LGBT entertainment news blog, including a group of nine contributors, more than 50,000 social media followers and over 2,300 email newsletter subscribers.</p>
+                                <p class="project-details white-text secondaryP"><span class="white-text" style="font-weight: bold">Highlight:</span> Sold the site to Q.Digital, Inc. in 2015 and was later offered a position to help the company grow its marketing efforts.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12">
+                        <div class="card teal-card experienceCard">
+                            <div class="card-content">
+                                <span class="card-title white-text">Social Media &amp; Marketing Coordinator</span>
+                                <h6 class="white-text">HealthyPets, Inc.&nbsp;&nbsp;|&nbsp;&nbsp;2014 - 2015</h6>
+                                <p class="project-details white-text">Union City, CA</p>
+                                <div class="divider"></div>
+                                <p class="project-details white-text secondaryP">Planned monthly content calendars and executed the organic and paid social media strategy for EntirelyPets.com's more than 600,000 social media followers across Facebook, Google+, Pinterest, Twitter, Instagram, Tumblr and YouTube.</p>
+                                <p class="project-details white-text secondaryP"><span class="white-text" style="font-weight: bold">Highlight:</span> Achieved an 800% ROAS on a Facebook retargeting ad for Seresto Flea &amp; Tick Collars.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12">
+                        <div class="card teal-card experienceCard">
+                            <div class="card-content">
+                                <span class="card-title white-text">English as a Second Language (ESL) Teacher</span>
+                                <h6 class="white-text">ENI Academy&nbsp;&nbsp;|&nbsp;&nbsp;2013 - 2014</h6>
+                                <p class="project-details white-text">Anyang, Gyonggi-do, South Korea</p>
+                                <div class="divider"></div>
+                                <p class="project-details white-text secondaryP">Elementary and middle school ESL teacher at an after school academy just south of Seoul.</p>
+                                <p class="project-details white-text secondaryP"><span class="white-text" style="font-weight: bold">Highlight:</span> Learned to navigate a different culture and survive in a country where I didn't have a full grasp of the primary language.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12">
+                        <div class="card teal-card experienceCard">
+                            <div class="card-content">
+                                <span class="card-title white-text">Social Media &amp; Content Marketing Specialist</span>
+                                <h6 class="white-text">PRxDigital Silicon Valley&nbsp;&nbsp;|&nbsp;&nbsp;2012 - 2013</h6>
+                                <p class="project-details white-text">San Jose, CA</p>
+                                <div class="divider"></div>
+                                <p class="project-details white-text secondaryP">Produced blog content to help generate new business leads and developed integrated marketing campaigns for a variety of clients, including Orchard Supply Hardware, San Jose Repertory Theater, Valley Medical Center, Lace Anchors and more.</p>
+                                <p class="project-details white-text secondaryP"><span class="white-text" style="font-weight: bold">Highlight:</span> Created a Facebook advertising campaign that received a CTR that was twice as high as all previous campaigns.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12">
+                        <div class="card teal-card experienceCard">
+                            <div class="card-content">
+                                <span class="card-title white-text">Social Media &amp; Communications Coordinator</span>
+                                <h6 class="white-text">Fresh Produce Locator&nbsp;&nbsp;|&nbsp;&nbsp;2011 - 2012</h6>
+                                <p class="project-details white-text">San Jose, CA</p>
+                                <div class="divider"></div>
+                                <p class="project-details white-text secondaryP">Created, managed, optimized and analyzed organic content for Facebook, LinkedIn and Twitter. Co-wrote a 32-page business plan that included a full marketing strategy.</p>
+                                <p class="project-details white-text secondaryP"><span class="white-text" style="font-weight: bold">Highlight:</span> Created a Facebook advertising campaign that received a CTR that was twice as high as all previous campaigns.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s1 m3 l4"></div>
+                        <a href="https://www.linkedin.com/in/timothywinfred/"target="_blank">
+                            <div class="col s10 m6 l4">
+                                <div class="card orange-card">
+                                    <div class="card-content center project-content">
+                                        <h6 class="white-text">See More on LinkedIn</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="col s1 m3 l4"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </main> 
+
     <footer>
         <!-- Jump To -->
-        <h5 class="center section-head">Jump To:</h5>
+        <h5 class="center section-head glow-txt">Jump To:</h5>
         <div class="row jump-to">
             <a href="/projects">
                 <div class="col s6 m6 l3">
@@ -424,11 +483,11 @@
         <!-- Footer Push -->
         <div class="footer-push"></div>
         <!-- Up Next -->
-        <a href="/experience">
+        <a href="/about">
             <div class="next-bar waves-effect" style="display: none">
                 <div class="next-text">
-                    <h6>Up Next: <span style="font-weight: bold" class="white-text">Experience&nbsp;</span></h6>
-                    <p><i class="material-icons next-arrow">arrow_forward</i></p>
+                    <h6>Up Next: <span style="font-weight: bold" class="white-text">About Me&nbsp;</span></h6>
+                    <p>&nbsp;<i class="material-icons next-arrow">arrow_forward</i></p>
                 </div>
             </div>
         </a>
