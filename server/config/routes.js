@@ -23,10 +23,10 @@ module.exports = function(app){
     app.get('/experience', pageController.experience);
     app.get('/about', pageController.about);
     app.get('/contact', pageController.contact);
-    app.get('/login/admin_access', pageController.login);
+    app.get('/login', pageController.login);
     app.post('/login', pageController.loginPost);
-    // app.get('/reg', pageController.register);
-    // app.post('/register', pageController.registerPost);
+    app.get('/register', pageController.register);
+    app.post('/register', pageController.registerPost);
     app.get('/admin', pageController.admin);
     app.get('/logout', pageController.logout);
     app.get('*', (req, res)=>{

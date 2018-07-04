@@ -1,1 +1,363 @@
-hi
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>tim winfred = ["Web Developer", "Entrepreneur", "Digital Marketer", "Designer"]</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Full-stack freelance web programmer, software developer and designer in Los Angeles, California.">
+    <meta name="keywords" content="tim winfred, timothy winfred, full stack, web, software, developer, programmer, freelance, full-stack, web programmer, web developer, software developer, software programmer, web designer, back-end, front-end, back-end developer, front-end programmer, timwinfred.com, timwinfred, timothywinfred.com timothywinfred">
+    <meta property="og:site_name" content="TimWinfred.com">
+    <meta property="og:url" content="http://www.timwinfred.com">
+    <meta property="og:title" content='tim winfred = ["Web Developer", "Entrepreneur", "Digital Marketer", "Designer"]'>
+    <meta property="og:description" content="Full-stack freelance web programmer, software developer and designer in Los Angeles, California.">
+    <meta property="og:image" content="/img/tim_professional_photo_fb.jpg">
+    <meta property="og:image:width" content="630">
+    <meta property="og:image:height" content="330">
+    <meta property="og:type" content="website">
+    <meta name="twitter:site" content="timwinfred">
+    <meta name="twitter:url" content="http://www.timwinfred.com">
+    <meta name="twitter:title" content='tim winfred = ["Web Developer", "Entrepreneur", "Digital Marketer", "Designer"]'>
+    <meta name="twitter:description" content="Full-stack freelance web programmer, software developer and designer in Los Angeles, California.">
+    <meta name="twitter:card" content="summary">
+    <meta name="title" content='tim winfred = ["Web Developer", "Entrepreneur", "Digital Marketer", "Designer"]'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/main.css">
+    <audio id="click" src="/click.mp3" preload="auto"></audio>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const click = document.getElementById('click');
+            // Side Nav
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems);
+            var instance = M.Sidenav.getInstance(elems);
+
+            // Hide Tooltip
+            function hideOnlineTooltip(){
+                $('.online-tooltip').fadeOut('fast', function(){
+                    tooltipCount++;
+                });
+            }
+            
+            setTimeout(function(){
+                hideOnlineTooltip();
+            }, 6000);
+
+            // MTG API Eater Egg
+            $(document).on('click', '.profile-photo', function(){
+                $.get("https://api.scryfall.com/cards/random", function(data) {
+                    $('.profile-photo').css('height', )
+                    $('.profile-photo').attr('src', data.image_uris.art_crop);
+                })
+                
+            })
+            // Char Count on Forms
+            $(document).ready(function() {
+                $('textarea#message').characterCounter();
+            });
+            // Offline Mail Button
+            var statusBox = false;
+            $(document).on('click', '.offline-status', function(){
+                statusBox = true;
+                $('.offline-status').hide(function(){
+                    $('.offline-box').show('slide', { direction: 'right' });
+                });
+                $('.online-tooltip').hide();
+            })
+            $(document).on('click', '.offlineBtn', function(){
+                $('.offline-box').hide(function(){
+                    $('.offline-status').show();
+                    errMsg = [];
+                })
+                statusBox = false;
+            })
+
+            // Offline Form Validation
+            var email_reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+            $(document).on('click', '.offlineSubmitBtn', function(){
+                var errMsg = [];
+
+                if($('#email').val().length < 1 || !email_reg.test($('#email').val()) || $('#name').val().length < 1 || $('#name').val().length < 3 || $('#message').val().length < 1 || $('#message').val().length < 5){
+                    if($('#email').val().length < 1){
+                        errMsg.push("An email is required.")
+                    }else if(!email_reg.test($('#email').val())){
+                        errMsg.push("Your email isn't the correct format.")
+                    }
+                    if($('#name').val().length < 1){
+                        errMsg.push("A name is required.")
+                    }else if($('#name').val().length < 3){
+                        errMsg.push("Your name is too short.")
+                    }
+                    if($('#message').val().length < 1){
+                        errMsg.push("A message is required.")
+                    }else if($('#message').val().length < 5){
+                        errMsg.push("Your message is too short.")
+                    }
+                    for(var x in errMsg){
+                        $('.errMsg').append(errMsg[x]+"&nbsp;&nbsp;")
+                    }
+                }else{
+                    $('#emailForm').submit();
+                }
+            })
+            // SOCKET Connection
+            var socket = io.connect();
+            var socketId;
+            socket.on('connect', function(){
+                socketId = socket.id;
+                console.log(socket.id);
+            })
+            // Online Chat Button
+            var chatBox = false;
+            $( function() {
+                $( ".dialog" ).dialog({autoOpen: false});
+            } );
+
+            $(document).on('click', '.online-status', function(){
+                $( ".dialog" ).dialog('open');
+            })
+            
+            var chatErrs = [];
+            $(document).on('click', '.startChatBtn', function(){
+                if($('#chat_email').val().length < 1 || !email_reg.test($('#chat_email').val()) || $('#chat_first_name').val().length < 1 || $('#chat_first_name').val().length < 2 || $('#chat_last_name').val().length < 1 || $('#chat_last_name').val().length < 2 || $('#chat_message').val().length < 1 || $('#chat_message').val().length < 5){
+                    if($('#chat_email').val().length < 1){
+                        chatErrs.push("An email is required.")
+                    }else if(!email_reg.test($('#chat_email').val())){
+                        chatErrs.push("Your email isn't the correct format.")
+                    }
+                    if($('#chat_first_name').val().length < 1){
+                        chatErrs.push("A first name is required.")
+                    }else if($('#chat_first_name').val().length < 2){
+                        chatErrs.push("Your first name is too short.")
+                    }
+                    if($('#chat_last_name').val().length < 1){
+                        chatErrs.push("A last name is required.")
+                    }else if($('#chat_last_name').val().length < 2){
+                        chatErrs.push("Your last name is too short.")
+                    }
+                    if($('#chat_message').val().length < 1){
+                        chatErrs.push("A message is required.")
+                    }else if($('#chat_message').val().length < 5){
+                        chatErrs.push("Your message is too short.")
+                    }
+                    for(var x in chatErrs){
+                        $('.chatErrs').append(chatErrs[x]+"&nbsp;&nbsp;")
+                    }
+                }else{
+                    $.ajax({
+                        url: '/api/chats',
+                        type: 'POST',
+                        data: {
+                            chat_email: $('#chat_email').val(),
+                            chat_first_name: $('#chat_first_name').val(),
+                            chat_last_name: $('#chat_last_name').val(),
+                            chat_message: $('#chat_message').val(),
+                            chat_socket: socketId,
+                        },
+                        success: function(result){
+                            if(result['message'] == "Success"){
+                                let chat_id = result['data'][0]['_id'];
+                                socket.emit('new_chat', chat_id, socketId, function(){
+                                    click.play();
+                                    $( ".dialog" ).dialog('close')
+                                    $('.online-tooltip').fadeOut('fast');
+                                    $('.status-icon').fadeOut('fast', function(){
+                                        $('.online-box').show('slide', { direction: 'right' });
+                                        $('#chat_email').val('');
+                                        $('#chat_first_name').val('');
+                                        $('#chat_last_name').val('');
+                                        $('#chat_message').val('');
+                                    });
+                                    chatBox = true;
+                                })
+                            }
+                        }
+                    });
+                }
+            })
+            const color = getColor();
+            function getColor() {
+                var letters = 'BCDEF'.split('');
+                var color = '#';
+                for (var i = 0; i < 6; i++ ) {
+                    color += letters[Math.floor(Math.random() * letters.length)];
+                }
+                return color;
+            }
+
+            socket.on('chat_messages', function(messages){
+                click.play();
+                console.log('Got messages from server!', messages);
+                let chatMessages = '';
+                for(x in messages){
+                    console.log(x)
+                    if(messages[x].user == "AdminTim"){
+                        chatMessages += "<div class='messageHolder' style='text-align: right'><p style='background-color: "+ color +"'><span style='font-weight: bold'>Tim:</span> "+ messages[x].content +"</p></div>"
+                    }else{
+                        chatMessages += "<div class='messageHolder'><p style='background-color: #95cbd3'><span style='font-weight: bold'>You:</span> "+ messages[x].content +"</p></div>"
+                    }
+                }
+                $('.chat-wrapper').html(chatMessages);
+            })
+
+            $(document).on('click', '.onlineSubmitBtn', function(){
+                let msg = $('.chat_text').val();
+                socket.emit('send_msg', socketId, msg);
+                $('.chat_text').val('');
+            })
+
+            // socket.on('new_msg')
+
+            $(document).on('click', '.onlineBtn', function(){
+                $('.online-box').hide(function(){
+                    $('.online-status').show();
+                    chatErrs = [];
+                })
+                chatBox = false;
+            })
+        });
+    </script>
+</head>
+<body class="contact-photo">
+    <header>
+        <!-- Top Nav -->
+        <nav class="transparent z-depth-0 top-nav">
+            <div class="nav-wrapper">
+                <a href="/"><img class="brand-logo center hide-on-small-only top-logo" src="/img/tim-winfred-logo.png" alt="tim winfred"></a>
+                <a href="/"><img class="brand-logo center hide-on-med-and-up small-logo top-logo" src="/img/tim-winfred-logo.png" alt="tim winfred logo"></a>
+                <i data-target="slide-out" class="material-icons teal-icon teal-icon-large left hide-on-small-only sidenav-trigger top-menu">menu</i>
+                <i data-target="slide-out" class="material-icons teal-icon teal-icon-small left hide-on-med-and-up sidenav-trigger top-menu">menu</i>
+            </div>
+        </nav>
+        <!-- Sticky Nav -->
+        <nav class="z-depth-0 sticky-nav" style="display: none">
+            <div class="nav-wrapper">
+                <a href="/"><img class="brand-logo center hide-on-small-only sticky-logo" src="/img/tim-winfred-logo.png" alt="tim winfred" style="display: none"></a>
+                <a href="/"><img class="brand-logo center hide-on-med-and-up small-logo sticky-logo" src="/img/tim-winfred-logo.png" alt="tim winfred logo" style="display: none"></a>
+                <i data-target="slide-out" class="material-icons teal-icon teal-icon-large left hide-on-small-only sidenav-trigger sticky-menu" style="display: none">menu</i>
+                <i data-target="slide-out" class="material-icons teal-icon teal-icon-small left hide-on-med-and-up sidenav-trigger sticky-menu" style="display: none">menu</i>
+            </div>
+        </nav>
+        <!-- Slide Out Nav -->
+        <ul id="slide-out" class="sidenav">
+            <li><div class="user-view">
+                <img class="menu-logo center" src="/img/tim-winfred-logo.png" alt="tim winfred logo">
+            </div></li>
+            <li><a class="waves-effect" href="/projects"><i class="material-icons">devices</i>Projects</a></li>
+            <li><a class="waves-effect" href="/experience"><i class="material-icons">work</i>Experience</a></li>
+            <li><a class="waves-effect" href="/about"><i class="material-icons">person</i>About Me</a></li>
+            <li><a class="waves-effect" href="/contact"><i class="material-icons">email</i>Contact</a></li>
+            <li><div class="divider"></div></li>
+            <li>
+                <a class="left waves-effect social-link" href="https://www.linkedin.com/in/timothywinfred/" target="_blank"><img class="social-logo" src="/img/linkedin.png" alt="linkedin"></a>
+                <a class="left waves-effect social-link" href="https://github.com/twinfred" target="_blank"><img class="social-logo" src="/img/github.png" alt="github"></a>
+                <a class="left waves-effect social-link" href="https://twitter.com/timwinfred/" target="_blank"><img class="social-logo" src="/img/Twitter.png" alt="twitter"></a>
+                <a class="left waves-effect social-link" href="mailto:timwinfred@gmail.com"><img class="social-logo" src="/img/email.png" alt="email"></a>
+            </li>
+        </ul>
+    </header>
+    <main>
+        <!-- Contact Me -->
+        <h4 class="center section-head glow-txt">Contact:</h4>
+        <div class="row recent-projects">
+            <div class="col m2 l3"></div>
+            <div class="col s12 m8 l6">
+                <div class="card">
+                    <div class="card-content">
+                        <h6 class="center bold">Interested in working together? Have a question?</h6>
+                        <h6 class="center">Send me a message using the form below and I will get back to you as soon as I can.</h6>
+                        <form action="https://formspree.io/timwinfred@gmail.com" method="POST" id="emailForm">
+                            <input type="email" name="_replyto" id="email" class="validate" placeholder="Email">
+                            <input type="text" name="name" id="name" class="validate" placeholder="Name">
+                            <textarea name="message" id="message" class="validate materialize-textarea" placeholder="Message" minlength="1"></textarea>
+                        </form>
+                        <p class="errMsg errorMsg"></p>
+                        <button class="btn waves-effect submitBtn offlineSubmitBtn">Send Message</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main> 
+    <footer>
+        <!-- Jump To -->
+        <h5 class="center section-head glow-txt">Jump To:</h5>
+        <div class="row jump-to">
+            <a href="/projects">
+                <div class="col s6 m6 l3">
+                    <div class="card orange-card">
+                        <div class="card-content center project-content">
+                            <h6 class="white-text">All Projects</h6>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="/experience">
+                <div class="col s6 m6 l3">
+                    <div class="card orange-card">
+                        <div class="card-content center project-content">
+                            <h6 class="white-text">Experience</h6>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="/about">
+                <div class="col s6 m6 l3">
+                    <div class="card orange-card">
+                        <div class="card-content center project-content">
+                            <h6 class="white-text">About Me</h6>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="/contact">
+                <div class="col s6 m6 l3">
+                    <div class="card orange-card">
+                        <div class="card-content center project-content">
+                            <h6 class="white-text">Contact</h6>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <!-- Footer Push -->
+        <div class="footer-push"></div>
+        <!-- Chat Available -->
+        <% if(online){ %>
+            <div class="status-icon circle green valign-wrapper online-status status-icon-contact">
+                <div class="horizAlign">
+                    <i class="material-icons next-arrow white-text small">chat_bubble</i>
+                </div>
+            </div>
+            <div class="online-tooltip valign-wrapper online-tooltip-contact">
+                <p class="white-text">Tim's online! Send him a chat message.</p>
+            </div>
+            <div class="dialog" title="Start a Chat with Tim...">
+                <form id="startChat">
+                    <input type="email" name="_replyto" id="chat_email" class="validate" placeholder="Email">
+                    <input type="text" name="first_name" id="chat_first_name" class="validate" placeholder="First Name">
+                    <input type="text" name="last_name" id="chat_last_name" class="validate" placeholder="Last Name">
+                    <textarea name="message" id="chat_message" class="validate materialize-textarea" placeholder="First message..." data-length="280" minlength="1" maxlength="280"></textarea>
+                </form>
+                <p class="chatErrs errorMsg"></p>
+                <button class="btn waves-effect submitBtn startChatBtn">Start Chat</button>
+            </div>
+            <div class="online-box" style="display: none">
+                <div class="chat-wrapper"></div>
+                <div class="chat-msg">
+                    <textarea name="chat" id="chat" class="chat_text" placeholder="Type a message..."></textarea>
+                </div>
+                <p class="errMsg errorMsg"></p>
+                <button class="btn-small waves-effect submitBtn onlineSubmitBtn right"><i class="material-icons next-arrow white-text small">send</i></button>
+                <a href="#!"><p class="left-align onlineBtn">Close</p></a>
+            </div>
+        <% } %>
+    </footer>
+</body>
+</html>

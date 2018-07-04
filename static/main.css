@@ -239,6 +239,40 @@ header {
 .card-caption {
     padding: 5px !important;
 }
+.about-photo {
+    background-image: 
+        linear-gradient(
+            rgb(255, 255, 255) 20%, 
+            #ffffff00,
+            rgb(255, 255, 255) 90% 
+        ),
+        url('img/great-salt-lake.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* Contact */
+.contact-photo {
+    background-image: 
+        linear-gradient(
+            rgb(255, 255, 255) 20%, 
+            #ffffff00,
+            rgb(255, 255, 255) 90% 
+        ),
+        url('img/santa-monica-mountain-dog-02.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.status-icon-contact {
+    bottom: 30px !important;
+}
+
+.online-tooltip-contact {
+    bottom: 43px !important;
+}
 
 /* Jump To */
 @media screen and (min-width: 993px) {
@@ -333,6 +367,7 @@ header {
     background-color: rgba(255, 255, 255, 0.938);
     padding: 15px;
     box-shadow: #747474 0px 0px 12px !important;
+    z-index: 100;
 }
 .ui-dialog-titlebar {
     height: 23px;
