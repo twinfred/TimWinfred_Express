@@ -9,6 +9,12 @@ p {
 input, textarea, select {
     margin-bottom: 4px;
 }
+.bold {
+    font-weight: bold;
+}
+.orange-text {
+    color: #e37222;
+}
 .submitBtn {
     background-color: #07889b !important;
 }
@@ -223,6 +229,15 @@ header {
 .glow-txt {
     text-shadow: white 0px 0px 20px, white 0px 0px 20px, white 0px 0px 20px, white 0px 0px 20px;
     color: #2c2c2c;
+}
+
+/* About Me */
+.image-caption {
+    font-size: 12px;
+    text-align: center;
+}
+.card-caption {
+    padding: 5px !important;
 }
 
 /* Jump To */

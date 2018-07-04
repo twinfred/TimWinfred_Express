@@ -50,6 +50,17 @@ module.exports = {
                 }
             })
         },
+    contact:
+        (req, res) => {
+            User.findOne({_id: '5b060037d478e404f0c76c66'}, (err, user)=>{
+                if(user){
+                    var status = {
+                        online: user.online,
+                    }
+                    res.render("contact", status);
+                }
+            })
+        },
     login:
         (req, res) => {
             res.render("login");

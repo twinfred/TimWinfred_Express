@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>tim winfred = ["Web Developer", "Entrepreneur", "Digital Marketer", "Designer"]</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Full-stack freelance web programmer, software developer and designer in Los Angeles, California.">
+    <meta name="keywords" content="tim winfred, timothy winfred, full stack, web, software, developer, programmer, freelance, full-stack, web programmer, web developer, software developer, software programmer, web designer, back-end, front-end, back-end developer, front-end programmer, timwinfred.com, timwinfred, timothywinfred.com timothywinfred">
+    <meta property="og:site_name" content="TimWinfred.com">
+    <meta property="og:url" content="http://www.timwinfred.com">
+    <meta property="og:title" content='tim winfred = ["Web Developer", "Entrepreneur", "Digital Marketer", "Designer"]'>
+    <meta property="og:description" content="Full-stack freelance web programmer, software developer and designer in Los Angeles, California.">
+    <meta property="og:image" content="/img/tim_professional_photo_fb.jpg">
+    <meta property="og:image:width" content="630">
+    <meta property="og:image:height" content="330">
+    <meta property="og:type" content="website">
+    <meta name="twitter:site" content="timwinfred">
+    <meta name="twitter:url" content="http://www.timwinfred.com">
+    <meta name="twitter:title" content='tim winfred = ["Web Developer", "Entrepreneur", "Digital Marketer", "Designer"]'>
+    <meta name="twitter:description" content="Full-stack freelance web programmer, software developer and designer in Los Angeles, California.">
+    <meta name="twitter:card" content="summary">
+    <meta name="title" content='tim winfred = ["Web Developer", "Entrepreneur", "Digital Marketer", "Designer"]'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/main.css">
+    <audio id="click" src="/click.mp3" preload="auto"></audio>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const click = document.getElementById('click');
+            // Side Nav
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems);
+            var instance = M.Sidenav.getInstance(elems);
+
+            // Top Nav & Next Bar
+            var location = 0;
+            var tooltipCount = 0;
+            $(window).scroll(function(){
+                location = $(window).scrollTop()
+                if(location > 160){
+                    $('.next-bar').show();
+                    $('.sticky-nav').slideDown('fast', function(){
+                        $('.sticky-logo').fadeIn('fast');
+                        $('.sticky-menu').fadeIn('fast');
+                        if(!statusBox && !chatBox){
+                            $('.status-icon').fadeIn('fast', function(){
+                            if(tooltipCount == 0){
+                                $('.online-tooltip').fadeIn('fast');
+                            }
+                        })
+                        }
+                        $('.top-logo').fadeOut('fast');
+                        $('.top-menu').fadeOut('fast');
+                        function hideOnlineTooltip(){
+                            $('.online-tooltip').fadeOut('fast', function(){
+                                tooltipCount++;
+                            });
+                        }
+                        if(tooltipCount == 0){
+                            setTimeout(function(){
+                                hideOnlineTooltip();
+                            }, 6000);
+                        }
+                    });
+                }
+                if(location < 100){
+                    $('.next-bar').fadeOut('fast');
+                    $('.sticky-logo').fadeOut('fast');
+                    $('.sticky-menu').fadeOut('fast');
+                    $('.online-tooltip').fadeOut('fast');
+                    $('.status-icon').fadeOut('fast');
+                    $('.sticky-nav').slideUp('fast', function(){
+                        $('.top-logo').show('fast');
+                        $('.top-menu').fadeIn('fast');
+                    });
+                }
+            })
+            // MTG API Eater Egg
+            $(document).on('click', '.profile-photo', function(){
+                $.get("https://api.scryfall.com/cards/random", function(data) {
+                    $('.profile-photo').css('height', )
+                    $('.profile-photo').attr('src', data.image_uris.art_crop);
+                })
+                
+            })
+            // Char Count on Forms
+            $(document).ready(function() {
+                $('textarea#message').characterCounter();
+            });
+            // Offline Mail Button
+            var statusBox = false;
+            $(document).on('click', '.offline-status', function(){
+                statusBox = true;
+                $('.offline-status').hide(function(){
+                    $('.offline-box').show('slide', { direction: 'right' });
+                });
+                $('.online-tooltip').hide();
+            })
+            $(document).on('click', '.offlineBtn', function(){
+                $('.offline-box').hide(function(){
+                    $('.offline-status').show();
+                    errMsg = [];
+                })
+                statusBox = false;
+            })
+
+            // Offline Form Validation
+            var email_reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+            $(document).on('click', '.offlineSubmitBtn', function(){
+                var errMsg = [];
+
+                if($('#email').val().length < 1 || !email_reg.test($('#email').val()) || $('#name').val().length < 1 || $('#name').val().length < 3 || $('#message').val().length < 1 || $('#message').val().length < 5){
+                    if($('#email').val().length < 1){
+                        errMsg.push("An email is required.")
+                    }else if(!email_reg.test($('#email').val())){
+                        errMsg.push("Your email isn't the correct format.")
+                    }
+                    if($('#name').val().length < 1){
+                        errMsg.push("A name is required.")
+                    }else if($('#name').val().length < 3){
+                        errMsg.push("Your name is too short.")
+                    }
+                    if($('#message').val().length < 1){
+                        errMsg.push("A message is required.")
+                    }else if($('#message').val().length < 5){
+                        errMsg.push("Your message is too short.")
+                    }
+                    for(var x in errMsg){
+                        $('.errMsg').append(errMsg[x]+"&nbsp;&nbsp;")
+                    }
+                }else{
+                    $('#emailForm').submit();
+                }
+            })
+            // SOCKET Connection
+            var socket = io.connect();
+            var socketId;
+            socket.on('connect', function(){
+                socketId = socket.id;
+                console.log(socket.id);
+            })
+            // Online Chat Button
+            var chatBox = false;
+            $( function() {
+                $( ".dialog" ).dialog({autoOpen: false});
+            } );
+
+            $(document).on('click', '.online-status', function(){
+                $( ".dialog" ).dialog('open');
+            })
+            
+            var chatErrs = [];
+            $(document).on('click', '.startChatBtn', function(){
+                if($('#chat_email').val().length < 1 || !email_reg.test($('#chat_email').val()) || $('#chat_first_name').val().length < 1 || $('#chat_first_name').val().length < 2 || $('#chat_last_name').val().length < 1 || $('#chat_last_name').val().length < 2 || $('#chat_message').val().length < 1 || $('#chat_message').val().length < 5){
+                    if($('#chat_email').val().length < 1){
+                        chatErrs.push("An email is required.")
+                    }else if(!email_reg.test($('#chat_email').val())){
+                        chatErrs.push("Your email isn't the correct format.")
+                    }
+                    if($('#chat_first_name').val().length < 1){
+                        chatErrs.push("A first name is required.")
+                    }else if($('#chat_first_name').val().length < 2){
+                        chatErrs.push("Your first name is too short.")
+                    }
+                    if($('#chat_last_name').val().length < 1){
+                        chatErrs.push("A last name is required.")
+                    }else if($('#chat_last_name').val().length < 2){
+                        chatErrs.push("Your last name is too short.")
+                    }
+                    if($('#chat_message').val().length < 1){
+                        chatErrs.push("A message is required.")
+                    }else if($('#chat_message').val().length < 5){
+                        chatErrs.push("Your message is too short.")
+                    }
+                    for(var x in chatErrs){
+                        $('.chatErrs').append(chatErrs[x]+"&nbsp;&nbsp;")
+                    }
+                }else{
+                    $.ajax({
+                        url: '/api/chats',
+                        type: 'POST',
+                        data: {
+                            chat_email: $('#chat_email').val(),
+                            chat_first_name: $('#chat_first_name').val(),
+                            chat_last_name: $('#chat_last_name').val(),
+                            chat_message: $('#chat_message').val(),
+                            chat_socket: socketId,
+                        },
+                        success: function(result){
+                            if(result['message'] == "Success"){
+                                let chat_id = result['data'][0]['_id'];
+                                socket.emit('new_chat', chat_id, socketId, function(){
+                                    click.play();
+                                    $( ".dialog" ).dialog('close')
+                                    $('.online-tooltip').fadeOut('fast');
+                                    $('.status-icon').fadeOut('fast', function(){
+                                        $('.online-box').show('slide', { direction: 'right' });
+                                        $('#chat_email').val('');
+                                        $('#chat_first_name').val('');
+                                        $('#chat_last_name').val('');
+                                        $('#chat_message').val('');
+                                    });
+                                    chatBox = true;
+                                })
+                            }
+                        }
+                    });
+                }
+            })
+            const color = getColor();
+            function getColor() {
+                var letters = 'BCDEF'.split('');
+                var color = '#';
+                for (var i = 0; i < 6; i++ ) {
+                    color += letters[Math.floor(Math.random() * letters.length)];
+                }
+                return color;
+            }
+
+            socket.on('chat_messages', function(messages){
+                click.play();
+                console.log('Got messages from server!', messages);
+                let chatMessages = '';
+                for(x in messages){
+                    console.log(x)
+                    if(messages[x].user == "AdminTim"){
+                        chatMessages += "<div class='messageHolder' style='text-align: right'><p style='background-color: "+ color +"'><span style='font-weight: bold'>Tim:</span> "+ messages[x].content +"</p></div>"
+                    }else{
+                        chatMessages += "<div class='messageHolder'><p style='background-color: #95cbd3'><span style='font-weight: bold'>You:</span> "+ messages[x].content +"</p></div>"
+                    }
+                }
+                $('.chat-wrapper').html(chatMessages);
+            })
+
+            $(document).on('click', '.onlineSubmitBtn', function(){
+                let msg = $('.chat_text').val();
+                socket.emit('send_msg', socketId, msg);
+                $('.chat_text').val('');
+            })
+
+            // socket.on('new_msg')
+
+            $(document).on('click', '.onlineBtn', function(){
+                $('.online-box').hide(function(){
+                    $('.online-status').show();
+                    chatErrs = [];
+                })
+                chatBox = false;
+            })
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <!-- Top Nav -->
+        <nav class="transparent z-depth-0 top-nav">
+            <div class="nav-wrapper">
+                <a href="/"><img class="brand-logo center hide-on-small-only top-logo" src="/img/tim-winfred-logo.png" alt="tim winfred"></a>
+                <a href="/"><img class="brand-logo center hide-on-med-and-up small-logo top-logo" src="/img/tim-winfred-logo.png" alt="tim winfred logo"></a>
+                <i data-target="slide-out" class="material-icons teal-icon teal-icon-large left hide-on-small-only sidenav-trigger top-menu">menu</i>
+                <i data-target="slide-out" class="material-icons teal-icon teal-icon-small left hide-on-med-and-up sidenav-trigger top-menu">menu</i>
+            </div>
+        </nav>
+        <!-- Sticky Nav -->
+        <nav class="z-depth-0 sticky-nav" style="display: none">
+            <div class="nav-wrapper">
+                <a href="/"><img class="brand-logo center hide-on-small-only sticky-logo" src="/img/tim-winfred-logo.png" alt="tim winfred" style="display: none"></a>
+                <a href="/"><img class="brand-logo center hide-on-med-and-up small-logo sticky-logo" src="/img/tim-winfred-logo.png" alt="tim winfred logo" style="display: none"></a>
+                <i data-target="slide-out" class="material-icons teal-icon teal-icon-large left hide-on-small-only sidenav-trigger sticky-menu" style="display: none">menu</i>
+                <i data-target="slide-out" class="material-icons teal-icon teal-icon-small left hide-on-med-and-up sidenav-trigger sticky-menu" style="display: none">menu</i>
+            </div>
+        </nav>
+        <!-- Slide Out Nav -->
+        <ul id="slide-out" class="sidenav">
+            <li><div class="user-view">
+                <img class="menu-logo center" src="/img/tim-winfred-logo.png" alt="tim winfred logo">
+            </div></li>
+            <li><a class="waves-effect" href="/projects"><i class="material-icons">devices</i>Projects</a></li>
+            <li><a class="waves-effect" href="/experience"><i class="material-icons">work</i>Experience</a></li>
+            <li><a class="waves-effect" href="/about"><i class="material-icons">person</i>About Me</a></li>
+            <li><a class="waves-effect" href="/contact"><i class="material-icons">email</i>Contact</a></li>
+            <li><div class="divider"></div></li>
+            <li>
+                <a class="left waves-effect social-link" href="https://www.linkedin.com/in/timothywinfred/" target="_blank"><img class="social-logo" src="/img/linkedin.png" alt="linkedin"></a>
+                <a class="left waves-effect social-link" href="https://github.com/twinfred" target="_blank"><img class="social-logo" src="/img/github.png" alt="github"></a>
+                <a class="left waves-effect social-link" href="https://twitter.com/timwinfred/" target="_blank"><img class="social-logo" src="/img/Twitter.png" alt="twitter"></a>
+                <a class="left waves-effect social-link" href="mailto:timwinfred@gmail.com"><img class="social-logo" src="/img/email.png" alt="email"></a>
+            </li>
+        </ul>
+    </header>
+    <main>
+        <!-- All Projects -->
+        <h4 class="center section-head">About Me:</h4>
+        <div class="row recent-projects">
+            <div class="col s12 m5">
+                <div class="card orange-card">
+                    <div class="card-image">
+                        <img src="img/tim-winfred-korea-waterfall.jpg">
+                    </div>
+                    <div class="card-content card-caption">
+                        <p class="image-caption white-text">Visiting the Cheonjiyeon Waterfall, Jeju Island, South Korea (2014)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m7">
+                <div class="card teal-card">
+                    <div class="card-content">
+                        <h5 class="white-text bold">The Short Story</h5>
+                        <br>
+                        <p class="project-details white-text">Hi there! I’m Tim Winfred. I am a software engineer proficient in Python, Java and MEAN full-stack web development with a passion for solving problems with creativity and logic. My Bachelor of Science in Advertising, combined with more than six years of digital marketing experience, have taught me strong project and people management skills and have given me a keen eye for pattern recognition and creative design. I am currently seeking an opportunity where I can contribute to a team in a meaningful way while also making the world a better place.</p>
+                        <p class="project-details white-text">Please feel free to email me at <a class="white-text bold" href="mailto:timwinfred@gmail.com">timwinfred@gmail.com</a> or reach out to me on Twitter at <a class="white-text bold" href="https://twitter.com/timwinfred">@timwinfred</a> if you'd like to chat.</p>
+                        <br>
+                        <div class="divider"></div>
+                        <br>
+                        <h5 class="white-text bold">The Long Story</h5>
+                        <br>
+                        <h5 class="card-title white-text">Web Development &amp; Software Engineering</h5>
+                        <p class="project-details white-text">I started playing around with building websites in 2012 while working for a botique digital marketing agency and then two years later used Wordpress to build an LGBT entertainment news website called Dragaholic. The site quickly grew in popularity and eventually expanded to also include an eCommerce store that sold drop-ship merchandise. By the time I sold the site in late 2015, it had received over one million pageviews and accumulated more that 50,000 social media followers.</p>
+                        <p class="project-details white-text">I continued studying coding and completed the Codecademy HTML &amp; CSS online course in August of 2016. Then, in early 2018, after working in digital marketing for almost seven years, I decided to return to school and pursue my passion for web development full time.</p>
+                        <p class="project-details white-text">In June 2018, I completed the <a class="white-text bold" href="http://codingdojo.com" target="_blank">Coding Dojo</a> software engineering certification program in Burbank, California. The four-month course provided me with over 1,000 hours of hands-on experience across three full stack languages (Java/Spring, Python and MEAN) and added a great new collection of projects and mini applications to my portfolio.</p>
+                        <p class="project-details white-text">My current coding proficiency spans a variety of languages, frameworks and more:</p>
+                        <p class="white-text bold">Languages</p>
+                        <p class="white-text">Python, Java, JavaScript</p>
+                        <br>
+                        <p class="white-text bold">Databases</p>
+                        <p class="white-text">MySQL, Sqlite, MongoDB</p>
+                        <br>
+                        <p class="white-text bold">Frameworks</p>
+                        <p class="white-text">Spring Boot, Django, Flask, Node.js, Express.js, Angular, Bootstrap, Materialize</p>
+                        <br>
+                        <p class="white-text bold">Front-End Dev</p>
+                        <p class="white-text">HTML5, CSS3, jQuery, AJAX, Responsive Design</p>
+                        <br>
+                        <p class="white-text bold">Methodologies</p>
+                        <p class="white-text">OOP, MVC, MTV, RESTful APIs</p>
+                        <br>
+                        <p class="white-text bold">CMS Tools</p>
+                        <p class="white-text">Wordpress</p>
+                        <br>
+                        <h5 class="card-title white-text">Digital Marketing &amp; Graphic Design</h5>
+                        <p class="project-details white-text">Before returning to school, I was the Director of Marketing Operations at <a class="white-text bold" href="http://q.digital" target="_blank">Q.Digital, Inc.</a> for over than two years. While in this position, I managed the marketing team and lead the digital marketing campaigns for all brand partners, including 20th Century Fox, Alaska Airlines, AT&amp;T, Corona USA, Fox Searchlight Pictures, HBO, Las Vegas Convention and Visitors Authority, Lexus, San Francisco Travel Association, Sony Pictures, Stoli Vodka, Target, Trivago, Universal Pictures and Walt Disney Pictures, among others.</p>
+                        <p class="project-details white-text">My role at Q.Digital varied from day to day. On any given day I might need to help the sales team build sponsorship packages, create proposal decks and design mock-ups in response to RFPs. That same same day I would also have to oversee our brand campaign efforts, ranging from paid and organic social media, influencer marketing and celebrity partnerships and branded content to email marketing, event production, and media and public relations. On a weekly basis, I would manage between three to ten different brand marketing campaigns at each stage of its lifecycle.</p>
+                        <p class="project-details white-text">In addition to my time at Q.Digital, I have held a variety of marketing roles, both in-house and agency-side, including Shutterfly, HealthyPets and PRxDigital.</p>
+                        <p class="project-details white-text">Find out more about my previous work and educational experiences <a class="white-text bold" href="http://q.digital">here</a>.</p>
+                        <br>
+                        <h5 class="card-title white-text">Teaching English in South Korea</h5>
+                        <p class="project-details white-text">When I was 21 I got on a plane for the first. I booked a round-trip ticket to England and spent 10 days exploring beautiful cathedrals and the lush green British countryside with my brother and his wife. And just like that, the travel bug bit me...</p>
+                        <p class="project-details white-text">A little more than a year later, after I graduated from college and was working my first "real world job," a friend posted a status on Facebook about the amazing time she was having living in South Korea and teaching English. Out of curiosity, I sent her a message to ask her some question. And just like that, six months later I was moving into a studio apartment in Anyang city in Korea's Gyonggi-do provience (just south of Seoul).</p>
+                        <p class="project-details white-text">Living in Korea for a year was probably the most defining chapters of my life and it taught me so much. Not only did I get to truly experience the local culture and learn about their customs, but I also made amazing friendships and learned a lot about myself and the world I lived in.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main> 
+    <footer>
+        <!-- Jump To -->
+        <h5 class="center section-head">Jump To:</h5>
+        <div class="row jump-to">
+            <a href="/projects">
+                <div class="col s6 m6 l3">
+                    <div class="card orange-card">
+                        <div class="card-content center project-content">
+                            <h6 class="white-text">All Projects</h6>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="/experience">
+                <div class="col s6 m6 l3">
+                    <div class="card orange-card">
+                        <div class="card-content center project-content">
+                            <h6 class="white-text">Experience</h6>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="/about">
+                <div class="col s6 m6 l3">
+                    <div class="card orange-card">
+                        <div class="card-content center project-content">
+                            <h6 class="white-text">About Me</h6>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="/contact">
+                <div class="col s6 m6 l3">
+                    <div class="card orange-card">
+                        <div class="card-content center project-content">
+                            <h6 class="white-text">Contact</h6>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <!-- Footer Push -->
+        <div class="footer-push"></div>
+        <!-- Up Next -->
+        <a href="#!">
+            <div class="next-bar waves-effect" style="display: none">
+                <div class="next-text">
+                    <h6>Up Next: <span style="font-weight: bold" class="white-text">Experience&nbsp;</span></h6>
+                    <p><i class="material-icons next-arrow">arrow_forward</i></p>
+                </div>
+            </div>
+        </a>
+        <!-- Chat Available -->
+        <% if(online){ %>
+            <div class="status-icon circle green valign-wrapper online-status" style="display: none">
+                <div class="horizAlign">
+                    <i class="material-icons next-arrow white-text small">chat_bubble</i>
+                </div>
+            </div>
+            <div class="online-tooltip valign-wrapper" style="display: none">
+                <p class="white-text">Tim's online! Send him a chat message.</p>
+            </div>
+            <div class="dialog" title="Start a Chat with Tim...">
+                <form id="startChat">
+                    <input type="email" name="_replyto" id="chat_email" class="validate" placeholder="Email">
+                    <input type="text" name="first_name" id="chat_first_name" class="validate" placeholder="First Name">
+                    <input type="text" name="last_name" id="chat_last_name" class="validate" placeholder="Last Name">
+                    <textarea name="message" id="chat_message" class="validate materialize-textarea" placeholder="First message..." data-length="280" minlength="1" maxlength="280"></textarea>
+                </form>
+                <p class="chatErrs errorMsg"></p>
+                <button class="btn waves-effect submitBtn startChatBtn">Start Chat</button>
+            </div>
+            <div class="online-box" style="display: none">
+                <div class="chat-wrapper"></div>
+                <div class="chat-msg">
+                    <textarea name="chat" id="chat" class="chat_text" placeholder="Type a message..."></textarea>
+                </div>
+                <p class="errMsg errorMsg"></p>
+                <button class="btn-small waves-effect submitBtn onlineSubmitBtn right"><i class="material-icons next-arrow white-text small">send</i></button>
+                <a href="#!"><p class="left-align onlineBtn">Close</p></a>
+            </div>
+        <!-- Chat Unavailable -->
+        <% }else{ %>
+            <div class="status-icon circle blue valign-wrapper offline-status" style="display: none">
+                <div class="horizAlign">
+                    <i class="material-icons next-arrow white-text small">email</i>
+                </div>
+            </div>
+            <div class="online-tooltip valign-wrapper" style="display: none">
+                <p class="white-text">Would you like to send Tim a message?</p>
+            </div>
+            <div class="offline-box" style="display: none">
+                <form action="https://formspree.io/timwinfred@gmail.com" method="POST" id="emailForm">
+                    <input type="email" name="_replyto" id="email" class="validate" placeholder="Email">
+                    <input type="text" name="name" id="name" class="validate" placeholder="Name">
+                    <textarea name="message" id="message" class="validate materialize-textarea" placeholder="Message" data-length="280" minlength="1" maxlength="280"></textarea>
+                </form>
+                <p class="errMsg errorMsg"></p>
+                <button class="btn waves-effect submitBtn offlineSubmitBtn">Send Message</button>
+                <a href="#!"><p class="right-align offlineBtn">Close</p></a>
+            </div>
+        <% } %>
+    </footer>
+</body>
+</html>
