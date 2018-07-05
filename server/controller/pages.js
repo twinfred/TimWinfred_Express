@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const User = require('./../models/user');
 const session = require('express-session');
 const flash = require('express-flash');
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 module.exports = {
