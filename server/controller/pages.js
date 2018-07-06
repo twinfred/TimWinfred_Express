@@ -2,8 +2,6 @@ const mongoose = require('mongoose');
 const User = require('./../models/user');
 const session = require('express-session');
 const flash = require('express-flash');
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
 
 module.exports = {
     index:
@@ -69,16 +67,14 @@ module.exports = {
         (req, res) => {
             User.findOne({email: req.body.email}, (err, user)=>{
                 if(user){
-                    bcrypt.compare(req.body.password, user.password, (err, result)=>{
-                        if(!result){
-                            req.flash('error', "Incorrect email or password.");
-                            return res.redirect('/login');
-                        }else{
-                            console.log(user);
-                            req.session.user_id = user._id;
-                            return res.redirect('/admin');
-                        }
-                    })
+                    if(req.body.password != user.password){
+                        req.flash('error', "Incorrect email or password.");
+                        return res.redirect('/login');
+                    }else{
+                        console.log(user);
+                        req.session.user_id = user._id;
+                        return res.redirect('/admin');
+                    }
                 }else{
                     req.flash('error', "Incorrect email or password.");
                     return res.redirect('/login');
@@ -124,39 +120,27 @@ module.exports = {
                                 }
                                 newUser.first_name = req.body.first_name;
                                 newUser.last_name = req.body.last_name;
-                                console.log("attempting to hash pw")
-                                bcrypt.hash(req.body.password, saltRounds, (err, hashedPW)=>{
+                                newUser.password = req.body.password;
+                                newUser.save(err=>{
                                     if(err){
-                                        console.log("passwords err found")
-                                        req.flash('error', 'Something went wrong with your password. Please try again.');
+                                        console.log("save err found")
+                                        if(err.errors.email){
+                                            req.flash('error', err.errors.email.properties.message);
+                                        }
+                                        if(err.errors.first_name){
+                                            req.flash('error', err.errors.first_name.properties.message);
+                                        }
+                                        if(err.errors.last_name){
+                                            req.flash('error', err.errors.last_name.properties.message);
+                                        }
+                                        if(err.errors.birthday){
+                                            req.flash('error', err.errors.birthday.properties.message);
+                                        }
                                         return res.redirect('/register');
                                     }else{
-                                        console.log("hashed pw created")
-                                        console.log("HASHED PW:", hashedPW);
-                                        newUser.password = hashedPW;
-                                        console.log("attempting to save new user")
-                                        newUser.save(err=>{
-                                            if(err){
-                                                console.log("save err found")
-                                                if(err.errors.email){
-                                                    req.flash('error', err.errors.email.properties.message);
-                                                }
-                                                if(err.errors.first_name){
-                                                    req.flash('error', err.errors.first_name.properties.message);
-                                                }
-                                                if(err.errors.last_name){
-                                                    req.flash('error', err.errors.last_name.properties.message);
-                                                }
-                                                if(err.errors.birthday){
-                                                    req.flash('error', err.errors.birthday.properties.message);
-                                                }
-                                                return res.redirect('/register');
-                                            }else{
-                                                console.log("new user created")
-                                                req.session.user_id = newUser._id;
-                                                return res.redirect('/admin');
-                                            }
-                                        })
+                                        console.log("new user created")
+                                        req.session.user_id = newUser._id;
+                                        return res.redirect('/admin');
                                     }
                                 })
                             }
