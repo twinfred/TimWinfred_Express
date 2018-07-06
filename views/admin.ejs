@@ -30,6 +30,16 @@
     <link rel="stylesheet" href="/main.css">
     <audio id="doorbell" src="/doorbell.mp3" preload="auto"></audio>
     <audio id="click" src="/click.mp3" preload="auto"></audio>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-80641314-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-80641314-1');
+    </script>
+    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const doorbell = document.getElementById('doorbell');
